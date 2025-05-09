@@ -1,4 +1,3 @@
-"use client";
 import { useState, useEffect } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
@@ -43,6 +42,7 @@ const SignupPage = () => {
       } else {
         setError(result.message || t("signup.error"));
       }
+      // eslint-disable-next-line no-unused-vars
     } catch (err) {
       setError(t("signup.error"));
     } finally {

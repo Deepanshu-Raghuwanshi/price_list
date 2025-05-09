@@ -87,6 +87,11 @@ class Translation {
       { language: "en", key: "product.cancel", value: "Cancel" },
       { language: "en", key: "product.edit", value: "Edit" },
       { language: "en", key: "product.delete", value: "Delete" },
+      {
+        language: "en",
+        key: "product.noProducts",
+        value: "No products found. Create your first product!",
+      },
       { language: "en", key: "common.logout", value: "Logout" },
 
       // Spanish translations
@@ -144,6 +149,11 @@ class Translation {
       { language: "es", key: "product.cancel", value: "Cancelar" },
       { language: "es", key: "product.edit", value: "Editar" },
       { language: "es", key: "product.delete", value: "Eliminar" },
+      {
+        language: "es",
+        key: "product.noProducts",
+        value: "No se encontraron productos. ¡Crea tu primer producto!",
+      },
       { language: "es", key: "common.logout", value: "Cerrar Sesión" },
     ];
 

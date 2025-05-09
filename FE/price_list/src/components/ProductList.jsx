@@ -1,7 +1,6 @@
 import { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { FiSearch, FiEdit2, FiTrash2 } from "react-icons/fi";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/ProductList.css";
 

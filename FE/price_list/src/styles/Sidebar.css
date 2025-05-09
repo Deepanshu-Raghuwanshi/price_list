@@ -12,6 +12,7 @@
   display: flex;
   flex-direction: column;
   color: white;
+  overflow-y: auto;
 }
 
 .sidebar.open {
@@ -41,23 +42,24 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-6);
+  padding: var(--space-4);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   background: rgba(255, 255, 255, 0.05);
+  min-height: 70px;
 }
 
 .user-info {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .user-avatar {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 50px;
-  height: 50px;
+  width: 45px;
+  height: 45px;
   background: linear-gradient(
     135deg,
     var(--primary-color),
@@ -66,20 +68,25 @@
   color: white;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: var(--font-lg);
+  font-size: var(--font-md);
   box-shadow: var(--shadow);
   border: 2px solid rgba(255, 255, 255, 0.2);
+  flex-shrink: 0;
 }
 
 .user-details {
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 
 .user-name {
   font-size: var(--font-md);
   font-weight: 600;
   color: white;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .user-role {
@@ -101,6 +108,7 @@
   color: white;
   transition: var(--transition);
   font-size: var(--font-md);
+  flex-shrink: 0;
 }
 
 .close-sidebar:hover {
@@ -127,7 +135,7 @@
   display: flex;
   align-items: center;
   gap: var(--space-4);
-  padding: var(--space-4) var(--space-4);
+  padding: var(--space-3) var(--space-4);
   color: rgba(255, 255, 255, 0.7);
   transition: var(--transition);
   border-radius: var(--radius);
@@ -182,10 +190,11 @@
   justify-content: center;
   font-size: var(--font-lg);
   min-width: 24px;
+  flex-shrink: 0;
 }
 
 .sidebar-footer {
-  padding: var(--space-6);
+  padding: var(--space-4);
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   font-size: var(--font-xs);
   color: rgba(255, 255, 255, 0.5);
@@ -194,16 +203,105 @@
 }
 
 /* Desktop styles */
-@media (min-width: 768px) {
-  .sidebar {
-    transform: translateX(0);
-  }
-
-  .sidebar-overlay {
-    display: none;
-  }
-
+@media (min-width: 1024px) {
   .close-sidebar {
-    display: none;
+    display: flex; /* Always show close button */
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .sidebar {
+    width: 250px;
+  }
+
+  .sidebar-header {
+    padding: var(--space-3);
+    min-height: 60px;
+  }
+
+  .user-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: var(--font-sm);
+  }
+
+  .user-name {
+    font-size: var(--font-sm);
+  }
+
+  .sidebar-link {
+    padding: var(--space-3);
+    font-size: var(--font-sm);
+    gap: var(--space-3);
+  }
+
+  .sidebar-icon {
+    font-size: var(--font-md);
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    width: 230px;
+  }
+
+  .sidebar-header {
+    padding: var(--space-2);
+    min-height: 56px;
+  }
+
+  .user-avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .sidebar-link {
+    padding: var(--space-2) var(--space-3);
+    font-size: var(--font-xs);
+  }
+}
+
+/* iPad Mini */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .sidebar {
+    width: 260px;
+  }
+
+  .sidebar-header {
+    min-height: 65px;
+  }
+}
+
+/* Surface Pro 7 */
+@media only screen and (min-width: 912px) and (max-width: 1368px) {
+  .sidebar {
+    width: 270px;
+  }
+}
+
+/* Pixel 7 and similar devices */
+@media only screen and (min-width: 360px) and (max-width: 420px) {
+  .sidebar {
+    width: 220px;
+  }
+
+  .sidebar-link {
+    padding: var(--space-2);
+  }
+
+  .sidebar-header {
+    min-height: 54px;
+  }
+}
+
+/* Nest Hub and Nest Hub Max */
+@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+  .sidebar {
+    width: 280px;
+  }
+
+  .sidebar-header {
+    min-height: 75px;
   }
 }

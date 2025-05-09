@@ -5,11 +5,10 @@ import { useLanguage } from "../contexts/LanguageContext";
 import { productApi } from "../services/api";
 import { toast } from "react-toastify";
 import Header from "../components/Header";
-import Sidebar from "../components/sideBar";
+import Sidebar from "../components/Sidebar";
 import ProductList from "../components/ProductList";
 import ProductForm from "../components/ProductForm";
 import { FiPlus, FiLoader } from "react-icons/fi";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/DashboardPage.css";
 
@@ -18,7 +17,7 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
 
   const { user } = useAuth();
   const { t } = useLanguage();
@@ -42,6 +41,18 @@ const DashboardPage = () => {
       navigate("/");
     }
   }, [user, loading, navigate]);
+
+  // Handle window resize
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth < 1024) {
+        setSidebarOpen(false);
+      }
+    };
+
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
 
   const fetchProducts = async () => {
     try {
@@ -122,10 +133,9 @@ const DashboardPage = () => {
   return (
     <div className="dashboard-container">
       <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
+      <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
 
-      <div className="dashboard-main">
-        <Header toggleSidebar={toggleSidebar} />
-
+      <div className={`dashboard-main ${sidebarOpen ? "sidebar-open" : ""}`}>
         <main className="dashboard-content">
           {loading ? (
             <motion.div

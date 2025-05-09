@@ -2,17 +2,18 @@ import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { FiLogOut, FiMenu } from "react-icons/fi";
-// eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import "../styles/Header.css";
 
-const Header = ({ toggleSidebar }) => {
+const Header = ({ toggleSidebar, sidebarOpen }) => {
   const { user, logout } = useAuth();
   const { t } = useLanguage();
 
   return (
     <motion.header
-      className="header"
+      className={`header ${
+        sidebarOpen && window.innerWidth >= 1024 ? "header-with-sidebar" : ""
+      }`}
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}

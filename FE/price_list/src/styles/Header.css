@@ -1,7 +1,9 @@
 .header {
-  position: sticky;
+  position: fixed;
   top: 0;
-  z-index: 10;
+  left: 0;
+  right: 0;
+  z-index: 20;
   background: linear-gradient(
     to right,
     rgba(124, 58, 237, 0.95),
@@ -10,20 +12,27 @@
   box-shadow: var(--shadow-md);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  width: 100%;
+  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.header-with-sidebar {
+  left: 280px; /* Match sidebar width */
 }
 
 .header-content {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: var(--space-4) var(--space-6);
+  padding: var(--space-3) var(--space-4);
   height: 70px;
+  max-width: 100%;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .menu-button {
@@ -38,6 +47,7 @@
   color: white;
   transition: var(--transition);
   font-size: var(--font-lg);
+  flex-shrink: 0;
 }
 
 .menu-button:hover {
@@ -51,12 +61,15 @@
   color: white;
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   letter-spacing: 0.5px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-4);
+  gap: var(--space-3);
 }
 
 .logout-btn {
@@ -87,6 +100,12 @@
 }
 
 /* Responsive adjustments */
+@media (max-width: 1024px) {
+  .header-with-sidebar {
+    left: 0; /* Don't adjust on mobile/tablet */
+  }
+}
+
 @media (max-width: 768px) {
   .logout-text {
     display: none;
@@ -100,6 +119,95 @@
   }
 
   .header-content {
+    padding: var(--space-2) var(--space-3);
+    height: 60px;
+  }
+
+  .header-title {
+    font-size: var(--font-md);
+  }
+
+  .menu-button {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+@media (max-width: 480px) {
+  .header-content {
+    padding: var(--space-2);
+    height: 56px;
+  }
+
+  .header-actions {
+    gap: var(--space-2);
+  }
+
+  .menu-button {
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-md);
+  }
+
+  .header-title {
+    font-size: var(--font-sm);
+    max-width: 150px;
+  }
+}
+
+/* iPad Mini */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .header-with-sidebar {
+    left: 0; /* Don't adjust on iPad */
+  }
+
+  .header-content {
     padding: var(--space-3) var(--space-4);
+    height: 65px;
+  }
+
+  .header-actions {
+    gap: var(--space-3);
+  }
+}
+
+/* Surface Pro 7 */
+@media only screen and (min-width: 912px) and (max-width: 1368px) {
+  .header-with-sidebar {
+    left: 270px; /* Match sidebar width */
+  }
+
+  .header-content {
+    padding: var(--space-3) var(--space-6);
+  }
+}
+
+/* Pixel 7 and similar devices */
+@media only screen and (min-width: 360px) and (max-width: 420px) {
+  .header-content {
+    padding: var(--space-2);
+    height: 54px;
+  }
+
+  .menu-button {
+    width: 30px;
+    height: 30px;
+  }
+
+  .logout-btn {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Nest Hub and Nest Hub Max */
+@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+  .header-with-sidebar {
+    left: 280px; /* Match sidebar width */
+  }
+
+  .header-content {
+    padding: var(--space-4) var(--space-8);
+    height: 75px;
   }
 }

@@ -2,12 +2,12 @@ import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import { NavLink } from "react-router-dom";
 import { FiHome, FiPackage, FiUser, FiSettings, FiX } from "react-icons/fi";
-// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { user } = useAuth();
+  // eslint-disable-next-line no-unused-vars
   const { t } = useLanguage();
 
   const menuItems = [
@@ -106,7 +106,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                     isActive ? "sidebar-link active" : "sidebar-link"
                   }
                   onClick={() => {
-                    if (window.innerWidth < 768) {
+                    if (window.innerWidth < 1024) {
                       toggleSidebar();
                     }
                   }}
