@@ -5,6 +5,7 @@
   overflow: hidden;
   transition: var(--transition);
   transform: translateZ(0);
+  width: 100%;
 }
 
 .product-list-container:hover {
@@ -15,7 +16,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
-  padding: var(--space-6);
+  padding: var(--space-4);
   border-bottom: 1px solid var(--border-color);
   background: linear-gradient(to right, #f8fafc, #f1f5f9);
 }
@@ -46,6 +47,7 @@
 .search-container {
   position: relative;
   max-width: 400px;
+  width: 100%;
 }
 
 .search-icon {
@@ -59,7 +61,7 @@
 
 .search-input {
   width: 100%;
-  padding: var(--space-4) var(--space-4) var(--space-4) var(--space-12);
+  padding: var(--space-3) var(--space-4) var(--space-3) var(--space-12);
   font-size: var(--font-md);
   color: var(--text-color);
   background-color: white;
@@ -78,16 +80,18 @@
 .product-table-container {
   overflow-x: auto;
   padding: var(--space-2);
+  width: 100%;
 }
 
 .product-table {
   width: 100%;
   border-collapse: separate;
   border-spacing: 0;
+  min-width: 650px;
 }
 
 .product-table th {
-  padding: var(--space-4) var(--space-4);
+  padding: var(--space-3) var(--space-3);
   text-align: left;
   font-size: var(--font-sm);
   font-weight: 600;
@@ -109,7 +113,7 @@
 }
 
 .product-table td {
-  padding: var(--space-4) var(--space-4);
+  padding: var(--space-3) var(--space-3);
   font-size: var(--font-md);
   color: var(--text-color);
   border-bottom: 1px solid var(--border-color);
@@ -156,8 +160,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 36px;
+  height: 36px;
   border: none;
   background-color: var(--background-alt);
   border-radius: var(--radius);
@@ -192,6 +196,14 @@
   .hide-tablet {
     display: none;
   }
+
+  .product-list-title {
+    font-size: var(--font-lg);
+  }
+
+  .product-table td {
+    font-size: var(--font-sm);
+  }
 }
 
 @media (max-width: 768px) {
@@ -202,6 +214,7 @@
   .product-list-header {
     flex-direction: column;
     align-items: flex-start;
+    padding: var(--space-3);
   }
 
   .search-container {
@@ -211,12 +224,88 @@
 
   .product-table td,
   .product-table th {
-    padding: var(--space-3) var(--space-2);
-    font-size: var(--font-sm);
+    padding: var(--space-2) var(--space-2);
+    font-size: var(--font-xs);
   }
 
   .action-btn {
-    width: 36px;
-    height: 36px;
+    width: 32px;
+    height: 32px;
+    font-size: var(--font-sm);
+  }
+
+  .product-list-title::after {
+    width: 40px;
+    height: 3px;
+  }
+
+  .search-input {
+    padding: var(--space-2) var(--space-3) var(--space-2) var(--space-8);
+    font-size: var(--font-sm);
+  }
+
+  .search-icon {
+    left: var(--space-3);
+    font-size: var(--font-sm);
+  }
+}
+
+@media (max-width: 480px) {
+  .product-list-header {
+    padding: var(--space-2);
+  }
+
+  .product-list-title {
+    font-size: var(--font-md);
+    padding-bottom: var(--space-2);
+  }
+
+  .action-btn {
+    width: 28px;
+    height: 28px;
+  }
+}
+
+/* iPad Mini */
+@media only screen and (min-width: 768px) and (max-width: 1024px) {
+  .product-table {
+    min-width: 700px;
+  }
+
+  .product-list-header {
+    padding: var(--space-4);
+  }
+}
+
+/* Surface Pro 7 */
+@media only screen and (min-width: 912px) and (max-width: 1368px) {
+  .product-table {
+    min-width: 800px;
+  }
+}
+
+/* Pixel 7 and similar devices */
+@media only screen and (min-width: 360px) and (max-width: 420px) {
+  .product-table td,
+  .product-table th {
+    padding: var(--space-1) var(--space-1);
+    font-size: 0.7rem;
+  }
+
+  .action-btn {
+    width: 26px;
+    height: 26px;
+    font-size: 0.8rem;
+  }
+}
+
+/* Nest Hub and Nest Hub Max */
+@media only screen and (min-width: 1024px) and (max-width: 1600px) {
+  .product-table {
+    min-width: 900px;
+  }
+
+  .product-list-header {
+    padding: var(--space-6);
   }
 }
