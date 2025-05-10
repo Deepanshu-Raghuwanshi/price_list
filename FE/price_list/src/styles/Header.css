@@ -34,7 +34,6 @@
   align-items: center;
   justify-content: center;
   padding: 8px;
-  display: none; /* Hide by default, show only on mobile */
 }
 
 .profile-section {
@@ -91,13 +90,6 @@
   display: flex;
   align-items: center;
   gap: 16px;
-}
-
-/* Show hamburger menu only on mobile */
-@media (max-width: 1023px) {
-  .menu-button {
-    display: flex;
-  }
 }
 
 @media (max-width: 768px) {

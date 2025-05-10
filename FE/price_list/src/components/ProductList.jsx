@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useRef, useEffect } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { FiSearch, FiCheck, FiX, FiEdit } from "react-icons/fi";
@@ -22,6 +20,12 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
     product: null,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [tooltipState, setTooltipState] = useState({
+    visible: false,
+    text: "",
+    x: 0,
+    y: 0,
+  });
   const editInputRef = useRef(null);
 
   // Sample data to match the images
@@ -32,7 +36,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       name: "This is a test product with fifty characters this!",
       in_price: "900500",
       price: "1500800",
-      in_stock: "2500600",
+      in_stock: "1500800",
       unit: "kilometers/hour",
       description: "This is the description with fifty characters this",
     },
@@ -157,6 +161,8 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       } else {
         toast.error("Failed to update product");
       }
+
+      toast.success("Product updated successfully");
     } catch (error) {
       console.error("Error updating product:", error);
       toast.error(error.response?.data?.message || "Failed to update product");
@@ -186,6 +192,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
         onClick={() =>
           !editingState.isEditing && startEditing(product, field, value)
         }
+        title={value} // Native HTML tooltip for accessibility
       >
         {isEditing ? (
           <input
@@ -237,14 +244,18 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
         <div className="action-buttons">
           <button
             className="action-button add-button"
-            onClick={() => onEdit(null)}
+            onClick={() => onEdit && onEdit(null)}
+            aria-label="Add new product"
           >
             <span className="action-icon">+</span>
             <span className="action-text">
               {t("product.new") || "New Product"}
             </span>
           </button>
-          <button className="action-button print-button">
+          <button
+            className="action-button print-button"
+            aria-label="Print product list"
+          >
             <span className="action-icon">
               <PrintIcon />
             </span>
@@ -252,7 +263,10 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
               {t("product.printList") || "Print List"}
             </span>
           </button>
-          <button className="action-button toggle-button">
+          <button
+            className="action-button toggle-button"
+            aria-label="Toggle advanced mode"
+          >
             <span className="action-icon">
               <ToggleIcon />
             </span>
@@ -266,8 +280,12 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       {/* Mobile View */}
       <div className="product-list-mobile">
         <div className="product-headers">
-          <div className="product-header-name">{t("product.name")}</div>
-          <div className="product-header-price">{t("product.price")}</div>
+          <div className="product-header-name">
+            {t("product.name") || "Product/Service"}
+          </div>
+          <div className="product-header-price">
+            {t("product.price") || "Price"}
+          </div>
         </div>
 
         <div className="product-items">
@@ -337,7 +355,9 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
               </div>
             ))
           ) : (
-            <div className="no-products">{t("product.noProducts")}</div>
+            <div className="no-products">
+              {t("product.noProducts") || "No products found"}
+            </div>
           )}
         </div>
       </div>
@@ -346,19 +366,27 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       <div className="product-list-desktop">
         <div className="product-table-header">
           <div className="header-cell article-header">
-            {t("product.articleNumber")} <span className="header-arrow">↓</span>
+            {t("product.articleNumber") || "Article No."}{" "}
+            <span className="header-arrow">↓</span>
           </div>
           <div className="header-cell product-header">
-            {t("product.name")} <span className="header-arrow">↓</span>
+            {t("product.name") || "Product/Service"}{" "}
+            <span className="header-arrow">↓</span>
           </div>
-          <div className="header-cell in-price-header">
-            {t("product.inPrice")}
+          <div className="header-cell in-price-header tablet-hide">
+            {t("product.inPrice") || "In Price"}
           </div>
-          <div className="header-cell price-header">{t("product.price")}</div>
-          <div className="header-cell unit-header">{t("product.unit")}</div>
-          <div className="header-cell stock-header">{t("product.inStock")}</div>
-          <div className="header-cell description-header">
-            {t("product.description")}
+          <div className="header-cell price-header">
+            {t("product.price") || "Price"}
+          </div>
+          <div className="header-cell stock-header">
+            {t("product.inStock") || "In Stock"}
+          </div>
+          <div className="header-cell unit-header">
+            {t("product.unit") || "Unit"}
+          </div>
+          <div className="header-cell description-header desktop-only">
+            {t("product.description") || "Description"}
           </div>
           <div className="header-cell actions-header">
             {t("product.actions") || "Actions"}
@@ -394,7 +422,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
                   product,
                   "in_price",
                   product.in_price,
-                  "in-price-cell"
+                  "in-price-cell tablet-hide"
                 )}
                 {renderEditableCell(
                   product,
@@ -402,18 +430,18 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
                   product.price,
                   "price-cell"
                 )}
-                {renderEditableCell(product, "unit", product.unit, "unit-cell")}
                 {renderEditableCell(
                   product,
                   "in_stock",
                   product.in_stock,
                   "stock-cell"
                 )}
+                {renderEditableCell(product, "unit", product.unit, "unit-cell")}
                 {renderEditableCell(
                   product,
                   "description",
                   product.description,
-                  "description-cell"
+                  "description-cell desktop-only"
                 )}
                 <div className="table-cell actions-cell">
                   {editingState.isEditing &&
@@ -452,10 +480,25 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
               </div>
             ))
           ) : (
-            <div className="no-products">{t("product.noProducts")}</div>
+            <div className="no-products">
+              {t("product.noProducts") || "No products found"}
+            </div>
           )}
         </div>
       </div>
+
+      {/* Custom tooltip */}
+      {tooltipState.visible && (
+        <div
+          className="custom-tooltip"
+          style={{
+            left: `${tooltipState.x}px`,
+            top: `${tooltipState.y}px`,
+          }}
+        >
+          {tooltipState.text}
+        </div>
+      )}
     </motion.div>
   );
 };

@@ -1,3 +1,5 @@
+"use client";
+
 import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
@@ -9,6 +11,7 @@ const Header = ({ toggleSidebar, sidebarOpen }) => {
   const { user } = useAuth();
   const { t } = useLanguage();
 
+  // Hardcoded user profile data for demo
   const profile = {
     name: "John Andre",
     company: "Storfjord AS",
@@ -24,7 +27,7 @@ const Header = ({ toggleSidebar, sidebarOpen }) => {
     >
       <div className="header-content">
         <div className="header-left">
-          {/* Hamburger menu only visible on mobile */}
+          {/* Hamburger menu */}
           <motion.button
             className="menu-button"
             onClick={toggleSidebar}

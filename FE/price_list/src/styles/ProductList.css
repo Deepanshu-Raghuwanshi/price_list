@@ -50,7 +50,7 @@
   right: 16px;
   top: 50%;
   transform: translateY(-50%);
-  color: #0078ff;
+  color: #00e5ff;
   font-size: 18px;
 }
 
@@ -75,21 +75,22 @@
   padding: 0 16px;
   background-color: white;
   color: #0078ff;
+  position: relative;
 }
 
 .add-button {
-  background-color: #00e676;
+  background-color: #00e5ff;
   color: white;
 }
 
 .print-button {
-  background-color: #0078ff;
+  background-color: #00e5ff;
   color: white;
 }
 
 .toggle-button {
   background-color: white;
-  color: #0078ff;
+  color: #00e5ff;
   border: 1px solid #e0e0e0;
 }
 
@@ -104,6 +105,30 @@
   display: none;
   font-size: 14px;
   font-weight: 500;
+}
+
+/* Custom tooltip */
+.custom-tooltip {
+  position: fixed;
+  transform: translate(-50%, -100%);
+  background-color: rgba(0, 0, 0, 0.8);
+  color: white;
+  padding: 6px 10px;
+  border-radius: 4px;
+  font-size: 12px;
+  z-index: 1000;
+  pointer-events: none;
+}
+
+.custom-tooltip::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: rgba(0, 0, 0, 0.8) transparent transparent transparent;
 }
 
 /* Mobile View */
@@ -226,6 +251,7 @@
   gap: 8px;
   margin-bottom: 8px;
   padding: 0 8px;
+  align-items: center; /* Ensure vertical alignment */
 }
 
 .header-cell {
@@ -243,7 +269,7 @@
 }
 
 .product-header .header-arrow {
-  color: #00e676; /* Green color for Product/Service header arrow */
+  color: #00e5ff; /* Cyan color for Product/Service header arrow */
 }
 
 .article-header {
@@ -294,6 +320,7 @@
   gap: 8px;
   position: relative;
   cursor: pointer;
+  align-items: center; /* Ensure vertical alignment */
 }
 
 .product-table-row.selected .table-cell:not(.editing) {
@@ -370,7 +397,7 @@
 }
 
 .save-btn {
-  background-color: #00e676;
+  background-color: #00e5ff;
 }
 
 .cancel-btn {
@@ -432,6 +459,15 @@
   justify-content: center;
 }
 
+/* Hide elements based on screen size */
+.tablet-hide {
+  display: flex;
+}
+
+.desktop-only {
+  display: flex;
+}
+
 /* Responsive styles */
 @media (min-width: 768px) {
   .product-list-mobile {
@@ -477,6 +513,75 @@
   }
 }
 
+/* Tablet specific styles (766px to 1024px) */
+@media (min-width: 766px) and (max-width: 1024px) {
+  /* Show only specific columns for tablet view */
+  .tablet-hide {
+    display: none !important;
+  }
+
+  .desktop-only {
+    display: none !important;
+  }
+
+  /* Adjust column widths for tablet */
+  .article-cell {
+    width: 100px;
+  }
+
+  .name-cell {
+    min-width: 180px;
+  }
+
+  .price-cell {
+    width: 80px;
+  }
+
+  .stock-cell {
+    width: 80px;
+  }
+
+  .unit-cell {
+    width: 120px;
+  }
+
+  /* Adjust header widths to match cells */
+  .article-header {
+    width: 100px;
+  }
+
+  .product-header {
+    min-width: 180px;
+  }
+
+  .price-header {
+    width: 80px;
+  }
+
+  .stock-header {
+    width: 80px;
+  }
+
+  .unit-header {
+    width: 120px;
+  }
+
+  /* Hide text in action buttons */
+  .action-text {
+    display: none;
+  }
+
+  .action-button {
+    width: 48px;
+    padding: 0;
+  }
+
+  /* Ensure sidebar collapses */
+  .sidebar {
+    display: none;
+  }
+}
+
 @media (max-width: 767px) {
   .product-list-desktop {
     display: none;
@@ -510,6 +615,11 @@
     width: 32px;
     height: 32px;
     font-size: 14px;
+  }
+
+  /* Ensure sidebar collapses */
+  .sidebar {
+    display: none;
   }
 }
 
@@ -552,46 +662,8 @@
   }
 }
 
-/* Tablet specific styles */
-@media (min-width: 768px) and (max-width: 1024px) {
-  .product-table-row {
-    flex-wrap: wrap;
-  }
-
-  .table-cell {
-    margin-bottom: 4px;
-  }
-
-  .article-cell {
-    width: 100px;
-  }
-
-  .price-cell,
-  .in-price-cell,
-  .stock-cell {
-    width: 80px;
-  }
-
-  .unit-cell {
-    width: 120px;
-  }
-
-  .description-cell {
-    width: 200px;
-  }
-
-  .action-text {
-    display: none;
-  }
-
-  .action-button {
-    width: 48px;
-    padding: 0;
-  }
-}
-
 /* Large desktop styles */
-@media (min-width: 1200px) {
+@media (min-width: 1025px) {
   .product-list-container {
     max-width: 1200px;
     margin: 0 auto;
@@ -600,19 +672,13 @@
   .search-section {
     width: 40%;
   }
-}
 
-/* Desktop with sidebar styles */
-@media (min-width: 1024px) {
-  .top-controls {
-    padding: 16px 0;
+  /* Show all columns for desktop */
+  .desktop-only {
+    display: flex;
   }
 
-  .search-section {
-    flex-direction: column;
-  }
-
-  .action-buttons {
-    gap: 24px;
+  .tablet-hide {
+    display: flex;
   }
 }

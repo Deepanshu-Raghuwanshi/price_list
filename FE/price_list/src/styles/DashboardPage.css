@@ -130,6 +130,23 @@ body {
 
   .dashboard-content {
     padding: 0;
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+/* Fix for specific screen size (around 752 x 1301) */
+@media (min-width: 740px) and (max-width: 800px) {
+  .dashboard-content {
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin: 0;
+  }
+
+  .dashboard-main {
+    width: 100%;
+    max-width: 100%;
   }
 }
 
@@ -140,6 +157,7 @@ body {
 
   .dashboard-content {
     padding: 0;
+    width: 100%;
   }
 
   .dashboard-actions {
