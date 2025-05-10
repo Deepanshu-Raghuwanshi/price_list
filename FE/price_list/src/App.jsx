@@ -13,6 +13,7 @@ import SignupPage from "./pages/SignupPage";
 import DashboardPage from "./pages/DashboardPage";
 import "react-toastify/dist/ReactToastify.css";
 import "./App.css";
+import ProtectedRoute from "./components/ProtectedRoute";
 
 // Component to handle protected routes and redirects
 const AppRoutes = () => {
@@ -26,7 +27,7 @@ const AppRoutes = () => {
   }, [loading]);
 
   if (!isInitialized) {
-    return null; // Show nothing while checking authentication
+    return null;
   }
 
   return (
@@ -39,10 +40,38 @@ const AppRoutes = () => {
         path="/signup"
         element={user ? <Navigate to="/dashboard" replace /> : <SignupPage />}
       />
-      <Route path="/dashboard" element={<DashboardPage />} />
-      <Route path="/products" element={<DashboardPage />} />
-      <Route path="/profile" element={<DashboardPage />} />
-      <Route path="/settings" element={<DashboardPage />} />
+      <Route
+        path="/dashboard"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/products"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/profile"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/settings"
+        element={
+          <ProtectedRoute>
+            <DashboardPage />
+          </ProtectedRoute>
+        }
+      />
       <Route
         path="*"
         element={<Navigate to={user ? "/dashboard" : "/"} replace />}
@@ -50,35 +79,4 @@ const AppRoutes = () => {
     </Routes>
   );
 };
-
-function App() {
-  return (
-    <Router>
-      <LanguageProvider>
-        <AuthProvider>
-          <AppRoutes />
-          <ToastContainer
-            position="top-right"
-            autoClose={3000}
-            hideProgressBar={false}
-            newestOnTop
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            theme="colored"
-            toastStyle={{
-              borderRadius: "10px",
-              fontWeight: "500",
-              fontSize: "16px",
-              boxShadow: "0 10px 15px -3px rgba(0, 0, 0, 0.1)",
-            }}
-          />
-        </AuthProvider>
-      </LanguageProvider>
-    </Router>
-  );
-}
-
-export default App;
+export default AppRoutes;
