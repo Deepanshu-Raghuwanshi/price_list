@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { motion } from "framer-motion";
@@ -7,6 +7,8 @@ import "../styles/TermsPage.css";
 const TermsPage = () => {
   const { t } = useLanguage();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef(null);
+  const hamburgerRef = useRef(null);
 
   const handleBackToLogin = () => {
     window.location.href = "/";
@@ -20,31 +22,60 @@ const TermsPage = () => {
     setIsMenuOpen(!isMenuOpen);
   };
 
+  // Close menu when clicking outside
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        isMenuOpen &&
+        menuRef.current &&
+        hamburgerRef.current &&
+        !menuRef.current.contains(event.target) &&
+        !hamburgerRef.current.contains(event.target)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
   return (
     <div className="terms-container">
       <div className="navigation">
-        <div className="hamburger-menu" onClick={toggleMenu}>
-          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
-          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
-          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
-        </div>
+        <div className="nav-container">
+          <div
+            ref={hamburgerRef}
+            className={`hamburger-menu ${isMenuOpen ? "open" : ""}`}
+            onClick={toggleMenu}
+          >
+            <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+            <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+            <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+          </div>
 
-        <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
-          <a href="#" className="nav-link">
-            Home
-          </a>
-          <a href="#" className="nav-link">
-            Order
-          </a>
-          <a href="#" className="nav-link">
-            Our Customers
-          </a>
-          <a href="#" className="nav-link">
-            About us
-          </a>
-          <a href="#" className="nav-link">
-            Contact Us
-          </a>
+          <div
+            ref={menuRef}
+            className={`nav-links ${isMenuOpen ? "open" : ""}`}
+          >
+            <a href="#" className="nav-link">
+              Home
+            </a>
+            <a href="#" className="nav-link">
+              Order
+            </a>
+            <a href="#" className="nav-link">
+              Our Customers
+            </a>
+            <a href="#" className="nav-link">
+              About us
+            </a>
+            <a href="#" className="nav-link">
+              Contact Us
+            </a>
+          </div>
         </div>
         <div className="language-selector">
           <LanguageSwitcher />
