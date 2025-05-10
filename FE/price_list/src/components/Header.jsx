@@ -2,12 +2,23 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { FiMenu } from "react-icons/fi";
 import { motion } from "framer-motion";
 import "../styles/Header.css";
+import { useAuth } from "../contexts/AuthContext";
+import { useNavigate } from "react-router-dom";
 
 const Header = ({ toggleSidebar }) => {
+  const { logout } = useAuth();
+  const navigate = useNavigate();
+
   const profile = {
     name: "John Andre",
     company: "Storfjord AS",
     avatar: "/public/profile-avatar.png",
+  };
+
+  const handleLogout = (e) => {
+    e.preventDefault();
+    logout(); // Call the logout function
+    navigate("/"); // Redirect to the home page
   };
 
   return (
@@ -53,6 +64,10 @@ const Header = ({ toggleSidebar }) => {
 
         <div className="header-actions">
           <LanguageSwitcher />
+
+          <button className="logout-button" onClick={handleLogout}>
+            Logout
+          </button>
         </div>
       </div>
     </motion.header>
