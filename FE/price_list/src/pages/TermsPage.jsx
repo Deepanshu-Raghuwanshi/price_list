@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { motion } from "framer-motion";
@@ -5,21 +6,30 @@ import "../styles/TermsPage.css";
 
 const TermsPage = () => {
   const { t } = useLanguage();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleBackToLogin = () => {
-    // In a real app, this would use React Router's navigate
     window.location.href = "/login";
   };
 
   const handleDiamondClick = () => {
-    // Redirect to login page when diamond is clicked
     window.location.href = "/login";
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
   };
 
   return (
     <div className="terms-container">
       <div className="navigation">
-        <div className="nav-links">
+        <div className="hamburger-menu" onClick={toggleMenu}>
+          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+          <div className={`hamburger-line ${isMenuOpen ? "open" : ""}`}></div>
+        </div>
+
+        <div className={`nav-links ${isMenuOpen ? "open" : ""}`}>
           <a href="#" className="nav-link">
             Home
           </a>
@@ -41,14 +51,16 @@ const TermsPage = () => {
         </div>
       </div>
 
-      <div className="diamond-icon-container">
-        <img
-          src="https://storage.123fakturera.se/public/icons/diamond.png"
-          alt="Diamond"
-          className="diamond-icon"
-          onClick={handleDiamondClick}
-        />
-      </div>
+      {!isMenuOpen && ( // Only show diamond when menu is closed
+        <div className="diamond-icon-container">
+          <img
+            src="https://storage.123fakturera.se/public/icons/diamond.png"
+            alt="Diamond"
+            className="diamond-icon"
+            onClick={handleDiamondClick}
+          />
+        </div>
+      )}
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
@@ -62,18 +74,6 @@ const TermsPage = () => {
         className="terms-content-wrapper"
       >
         <h1 className="terms-title">{t("terms.title")}</h1>
-
-        <motion.button
-          className="back-button"
-          onClick={handleBackToLogin}
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.3 }}
-          whileHover={{ scale: 1.03 }}
-          whileTap={{ scale: 0.97 }}
-        >
-          {t("terms.backToLogin")}
-        </motion.button>
 
         <div className="terms-content">
           <div className="terms-box">
