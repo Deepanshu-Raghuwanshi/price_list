@@ -215,7 +215,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search Article No..."
+              placeholder={t("product.searchArticle") || "Search Article No..."}
               value={searchArticle}
               onChange={(e) => setSearchArticle(e.target.value)}
               className="search-input"
@@ -225,7 +225,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
           <div className="search-container">
             <input
               type="text"
-              placeholder="Search Product..."
+              placeholder={t("product.searchProduct") || "Search Product..."}
               value={searchProduct}
               onChange={(e) => setSearchProduct(e.target.value)}
               className="search-input"
@@ -240,19 +240,25 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
             onClick={() => onEdit(null)}
           >
             <span className="action-icon">+</span>
-            <span className="action-text">New Product</span>
+            <span className="action-text">
+              {t("product.new") || "New Product"}
+            </span>
           </button>
           <button className="action-button print-button">
             <span className="action-icon">
               <PrintIcon />
             </span>
-            <span className="action-text">Print List</span>
+            <span className="action-text">
+              {t("product.printList") || "Print List"}
+            </span>
           </button>
           <button className="action-button toggle-button">
             <span className="action-icon">
               <ToggleIcon />
             </span>
-            <span className="action-text">Advanced mode</span>
+            <span className="action-text">
+              {t("product.advancedMode") || "Advanced mode"}
+            </span>
           </button>
         </div>
       </div>
@@ -260,8 +266,8 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       {/* Mobile View */}
       <div className="product-list-mobile">
         <div className="product-headers">
-          <div className="product-header-name">Product/Service</div>
-          <div className="product-header-price">Price</div>
+          <div className="product-header-name">{t("product.name")}</div>
+          <div className="product-header-price">{t("product.price")}</div>
         </div>
 
         <div className="product-items">
@@ -340,17 +346,23 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
       <div className="product-list-desktop">
         <div className="product-table-header">
           <div className="header-cell article-header">
-            Article No. <span className="header-arrow">↓</span>
+            {t("product.articleNumber")} <span className="header-arrow">↓</span>
           </div>
           <div className="header-cell product-header">
-            Product/Service <span className="header-arrow">↓</span>
+            {t("product.name")} <span className="header-arrow">↓</span>
           </div>
-          <div className="header-cell in-price-header">In Price</div>
-          <div className="header-cell price-header">Price</div>
-          <div className="header-cell unit-header">Unit</div>
-          <div className="header-cell stock-header">In Stock</div>
-          <div className="header-cell description-header">Description</div>
-          <div className="header-cell actions-header">Actions</div>
+          <div className="header-cell in-price-header">
+            {t("product.inPrice")}
+          </div>
+          <div className="header-cell price-header">{t("product.price")}</div>
+          <div className="header-cell unit-header">{t("product.unit")}</div>
+          <div className="header-cell stock-header">{t("product.inStock")}</div>
+          <div className="header-cell description-header">
+            {t("product.description")}
+          </div>
+          <div className="header-cell actions-header">
+            {t("product.actions") || "Actions"}
+          </div>
         </div>
 
         <div className="product-table-body">

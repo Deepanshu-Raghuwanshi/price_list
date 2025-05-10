@@ -29,12 +29,12 @@ const LanguageSwitcher = () => {
     {
       code: "en",
       name: "English",
-      flag: "/public/en-flag.png",
+      flag: "/en-flag.png", // Removed 'public' from path
     },
     {
       code: "es",
       name: "Español",
-      flag: "/public/flag-es.png",
+      flag: "/flag-es.png", // Removed 'public' from path
     },
   ];
 

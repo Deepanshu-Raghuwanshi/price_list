@@ -7,6 +7,11 @@ async function seedSampleProducts() {
     // Check if products already exist
     const existingProducts = await Product.getAll();
 
+    if (existingProducts.length > 10) {
+      console.log("Sample products already exist. Skipping creation.");
+      return;
+    }
+
     console.log("Creating 30 sample products...");
 
     // Sample product categories and names
