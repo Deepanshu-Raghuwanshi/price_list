@@ -12,7 +12,7 @@ const Header = ({ toggleSidebar }) => {
   const profile = {
     name: "John Andre",
     company: "Storfjord AS",
-    avatar: "/public/profile-avatar.png",
+    avatar: "/profile-avatar.png",
   };
 
   const handleLogout = (e) => {
