@@ -192,7 +192,37 @@
 }
 
 .terms-box p {
-  margin-bottom: 15px;
+  margin-bottom: 20px;
+}
+
+.terms-box p:last-child {
+  margin-bottom: 0;
+}
+
+.terms-box p {
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.terms-box a {
+  color: #0078ff;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.terms-box a:hover {
+  text-decoration: underline;
+}
+
+.loading-text,
+.error-text {
+  text-align: center;
+  padding: 20px;
+  font-size: 16px;
+}
+
+.error-text {
+  color: #e74c3c;
 }
 
 .back-button {

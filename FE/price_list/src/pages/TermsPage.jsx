@@ -73,9 +73,21 @@ const TermsPage = () => {
       >
         <h1 className="terms-title">{t("terms.title")}</h1>
 
+        <motion.button
+          className="back-button"
+          onClick={handleBackToLogin}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.3 }}
+          whileHover={{ scale: 1.03 }}
+          whileTap={{ scale: 0.97 }}
+        >
+          {t("terms.backToLogin")}
+        </motion.button>
+
         <div className="terms-content">
           <div className="terms-box">
-            <p>{t("terms.content")}</p>
+            <div dangerouslySetInnerHTML={{ __html: t("terms.content") }} />
           </div>
         </div>
 
