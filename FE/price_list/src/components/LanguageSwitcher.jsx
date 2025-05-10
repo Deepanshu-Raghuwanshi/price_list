@@ -57,7 +57,7 @@ const LanguageSwitcher = () => {
           >
             <div className="language-loading-container">
               <FiLoader className="loading-spinner" />
-              <p>{t("common.loading")}</p>
+              <p>{t("Loading...")}</p>
             </div>
           </motion.div>
         )}
