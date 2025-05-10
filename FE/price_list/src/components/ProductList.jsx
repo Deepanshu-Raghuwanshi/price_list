@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { productApi } from "../services/api";
 import "../styles/ProductList.css";
 
-const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
+const ProductList = ({ products, onEdit, onProductUpdated }) => {
   const { t } = useLanguage();
   const [searchArticle, setSearchArticle] = useState("");
   const [searchProduct, setSearchProduct] = useState("");
@@ -20,12 +20,7 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
     product: null,
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [tooltipState, setTooltipState] = useState({
-    visible: false,
-    text: "",
-    x: 0,
-    y: 0,
-  });
+
   const editInputRef = useRef(null);
 
   // Sample data to match the images
@@ -486,19 +481,6 @@ const ProductList = ({ products, onEdit, onDelete, onProductUpdated }) => {
           )}
         </div>
       </div>
-
-      {/* Custom tooltip */}
-      {tooltipState.visible && (
-        <div
-          className="custom-tooltip"
-          style={{
-            left: `${tooltipState.x}px`,
-            top: `${tooltipState.y}px`,
-          }}
-        >
-          {tooltipState.text}
-        </div>
-      )}
     </motion.div>
   );
 };

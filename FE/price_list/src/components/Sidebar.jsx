@@ -1,11 +1,9 @@
 import { useAuth } from "../contexts/AuthContext";
-import { useLanguage } from "../contexts/LanguageContext";
 import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { user, logout } = useAuth();
-  const { t } = useLanguage();
   const navigate = useNavigate();
 
   const menuItems = [
@@ -99,7 +97,7 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
 
       <nav className="sidebar-nav">
         <ul className="sidebar-menu">
-          {menuItems.map((item, index) => (
+          {menuItems.map((item) => (
             <li
               key={item.path}
               className={`sidebar-menu-item ${item.active ? "active" : ""}`}

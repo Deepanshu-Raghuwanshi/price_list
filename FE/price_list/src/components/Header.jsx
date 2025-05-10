@@ -1,17 +1,9 @@
-"use client";
-
-import { useAuth } from "../contexts/AuthContext";
-import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
 import { FiMenu } from "react-icons/fi";
 import { motion } from "framer-motion";
 import "../styles/Header.css";
 
-const Header = ({ toggleSidebar, sidebarOpen }) => {
-  const { user } = useAuth();
-  const { t } = useLanguage();
-
-  // Hardcoded user profile data for demo
+const Header = ({ toggleSidebar }) => {
   const profile = {
     name: "John Andre",
     company: "Storfjord AS",
