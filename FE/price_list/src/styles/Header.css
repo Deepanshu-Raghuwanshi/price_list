@@ -3,211 +3,124 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 20;
-  background: linear-gradient(
-    to right,
-    rgba(124, 58, 237, 0.95),
-    rgba(59, 130, 246, 0.95)
-  );
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(10px);
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  width: 100%;
-  transition: left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.header-with-sidebar {
-  left: 280px; /* Match sidebar width */
+  height: 60px;
+  background-color: #0078ff;
+  color: white;
+  z-index: 1001; /* Higher than sidebar */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .header-content {
   display: flex;
-  align-items: center;
   justify-content: space-between;
-  padding: var(--space-3) var(--space-4);
-  height: 70px;
-  max-width: 100%;
+  align-items: center;
+  height: 100%;
+  padding: 0 16px;
 }
 
 .header-left {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 16px;
 }
 
 .menu-button {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 24px;
+  cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 8px;
+  display: none; /* Hide by default, show only on mobile */
+}
+
+.profile-section {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.profile-avatar {
   width: 40px;
   height: 40px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
-  border-radius: var(--radius);
-  color: white;
-  transition: var(--transition);
-  font-size: var(--font-lg);
-  flex-shrink: 0;
-}
-
-.menu-button:hover {
-  background: rgba(255, 255, 255, 0.2);
-  transform: rotate(5deg);
-}
-
-.header-title {
-  font-size: var(--font-lg);
-  font-weight: 700;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  letter-spacing: 0.5px;
-  white-space: nowrap;
+  border-radius: 50%;
   overflow: hidden;
-  text-overflow: ellipsis;
+  background-color: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  font-weight: bold;
+  color: white;
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+.profile-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-name {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.profile-company {
+  font-size: 12px;
+  opacity: 0.8;
 }
 
 .header-actions {
   display: flex;
   align-items: center;
-  gap: var(--space-3);
+  gap: 16px;
 }
 
-.logout-btn {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-  padding: var(--space-2) var(--space-4);
-  font-size: var(--font-sm);
-  font-weight: 600;
-  color: white;
-  background-color: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: var(--radius);
-  transition: var(--transition);
-}
-
-.logout-btn:hover {
-  background-color: rgba(255, 255, 255, 0.2);
-  transform: translateY(-2px);
-}
-
-.logout-btn:active {
-  transform: translateY(0);
-}
-
-.logout-icon {
-  font-size: var(--font-md);
-}
-
-/* Responsive adjustments */
-@media (max-width: 1024px) {
-  .header-with-sidebar {
-    left: 0; /* Don't adjust on mobile/tablet */
+/* Show hamburger menu only on mobile */
+@media (max-width: 1023px) {
+  .menu-button {
+    display: flex;
   }
 }
 
 @media (max-width: 768px) {
-  .logout-text {
+  .profile-section {
     display: none;
   }
 
-  .logout-btn {
-    padding: var(--space-2);
-    width: 40px;
-    height: 40px;
-    justify-content: center;
-  }
-
-  .header-content {
-    padding: var(--space-2) var(--space-3);
-    height: 60px;
-  }
-
   .header-title {
-    font-size: var(--font-md);
-  }
-
-  .menu-button {
-    width: 36px;
-    height: 36px;
+    font-size: 16px;
   }
 }
 
 @media (max-width: 480px) {
-  .header-content {
-    padding: var(--space-2);
+  .header {
     height: 56px;
   }
 
-  .header-actions {
-    gap: var(--space-2);
-  }
-
   .menu-button {
-    width: 32px;
-    height: 32px;
-    font-size: var(--font-md);
-  }
-
-  .header-title {
-    font-size: var(--font-sm);
-    max-width: 150px;
-  }
-}
-
-/* iPad Mini */
-@media only screen and (min-width: 768px) and (max-width: 1024px) {
-  .header-with-sidebar {
-    left: 0; /* Don't adjust on iPad */
+    font-size: 20px;
+    padding: 6px;
   }
 
   .header-content {
-    padding: var(--space-3) var(--space-4);
-    height: 65px;
-  }
-
-  .header-actions {
-    gap: var(--space-3);
-  }
-}
-
-/* Surface Pro 7 */
-@media only screen and (min-width: 912px) and (max-width: 1368px) {
-  .header-with-sidebar {
-    left: 270px; /* Match sidebar width */
-  }
-
-  .header-content {
-    padding: var(--space-3) var(--space-6);
-  }
-}
-
-/* Pixel 7 and similar devices */
-@media only screen and (min-width: 360px) and (max-width: 420px) {
-  .header-content {
-    padding: var(--space-2);
-    height: 54px;
-  }
-
-  .menu-button {
-    width: 30px;
-    height: 30px;
-  }
-
-  .logout-btn {
-    width: 36px;
-    height: 36px;
-  }
-}
-
-/* Nest Hub and Nest Hub Max */
-@media only screen and (min-width: 1024px) and (max-width: 1600px) {
-  .header-with-sidebar {
-    left: 280px; /* Match sidebar width */
-  }
-
-  .header-content {
-    padding: var(--space-4) var(--space-8);
-    height: 75px;
+    padding: 0 12px;
   }
 }

@@ -1,35 +1,85 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import { NavLink } from "react-router-dom";
-import { FiHome, FiPackage, FiUser, FiSettings, FiX } from "react-icons/fi";
-import { motion, AnimatePresence } from "framer-motion";
 import "../styles/Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const { user } = useAuth();
-  // eslint-disable-next-line no-unused-vars
   const { t } = useLanguage();
 
   const menuItems = [
     {
-      title: "Dashboard",
-      icon: <FiHome />,
-      path: "/dashboard",
+      title: "Invoices",
+      icon: "📄",
+      path: "/invoices",
+      color: "#4dabf7",
     },
     {
-      title: "Products",
-      icon: <FiPackage />,
-      path: "/products",
+      title: "Customers",
+      icon: "👤",
+      path: "/customers",
+      color: "#38d9a9",
     },
     {
-      title: "Profile",
-      icon: <FiUser />,
-      path: "/profile",
+      title: "My Business",
+      icon: "🏢",
+      path: "/business",
+      color: "#74c0fc",
     },
     {
-      title: "Settings",
-      icon: <FiSettings />,
-      path: "/settings",
+      title: "Invoice Journal",
+      icon: "📒",
+      path: "/invoice-journal",
+      color: "#4dabf7",
+    },
+    {
+      title: "Price List",
+      icon: "📊",
+      path: "/price-list",
+      active: true,
+      color: "#fcc419",
+    },
+    {
+      title: "Multiple Invoicing",
+      icon: "📑",
+      path: "/multiple-invoicing",
+      color: "#4dabf7",
+    },
+    {
+      title: "Unpaid Invoices",
+      icon: "⚠️",
+      path: "/unpaid-invoices",
+      color: "#ff6b6b",
+    },
+    {
+      title: "Offer",
+      icon: "🎁",
+      path: "/offer",
+      color: "#fcc419",
+    },
+    {
+      title: "Inventory Control",
+      icon: "📦",
+      path: "/inventory",
+      color: "#4dabf7",
+    },
+    {
+      title: "Member Invoicing",
+      icon: "👥",
+      path: "/member-invoicing",
+      color: "#4dabf7",
+    },
+    {
+      title: "Import/Export",
+      icon: "☁️",
+      path: "/import-export",
+      color: "#74c0fc",
+    },
+    {
+      title: "Log out",
+      icon: "🚪",
+      path: "/logout",
+      color: "#ced4da",
     },
   ];
 
@@ -38,92 +88,41 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
   }
 
   return (
-    <>
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            className="sidebar-overlay"
-            onClick={toggleSidebar}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.3 }}
-          />
-        )}
-      </AnimatePresence>
+    <aside className={`sidebar ${isOpen ? "open" : ""}`}>
+      <div className="sidebar-header">
+        <div className="menu-title">Menu</div>
+      </div>
 
-      <motion.aside
-        className={`sidebar ${isOpen ? "open" : ""}`}
-        animate={{
-          x: isOpen ? 0 : "-100%",
-          boxShadow: isOpen ? "10px 0 30px rgba(0, 0, 0, 0.1)" : "none",
-        }}
-        transition={{ type: "spring", stiffness: 400, damping: 40 }}
-      >
-        <div className="sidebar-header">
-          <motion.div
-            className="user-info"
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            <div className="user-avatar">
-              {user.username.charAt(0).toUpperCase()}
-            </div>
-            <div className="user-details">
-              <span className="user-name">{user.username}</span>
-              <span className="user-role">Admin</span>
-            </div>
-          </motion.div>
-          <motion.button
-            className="close-sidebar"
-            onClick={toggleSidebar}
-            whileHover={{ scale: 1.1, rotate: 90 }}
-            whileTap={{ scale: 0.9 }}
-          >
-            <FiX />
-          </motion.button>
-        </div>
+      <div className="sidebar-divider"></div>
 
-        <nav className="sidebar-nav">
-          <motion.ul
-            className="sidebar-menu"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: 0.3, staggerChildren: 0.1 }}
-          >
-            {menuItems.map((item, index) => (
-              <motion.li
-                key={item.path}
-                className="sidebar-menu-item"
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 0.1 * index }}
-              >
-                <NavLink
-                  to={item.path}
-                  className={({ isActive }) =>
-                    isActive ? "sidebar-link active" : "sidebar-link"
+      <nav className="sidebar-nav">
+        <ul className="sidebar-menu">
+          {menuItems.map((item, index) => (
+            <li
+              key={item.path}
+              className={`sidebar-menu-item ${item.active ? "active" : ""}`}
+            >
+              <NavLink
+                to={item.path}
+                className={({ isActive }) =>
+                  isActive ? "sidebar-link active" : "sidebar-link"
+                }
+                onClick={() => {
+                  if (window.innerWidth < 1024) {
+                    toggleSidebar();
                   }
-                  onClick={() => {
-                    if (window.innerWidth < 1024) {
-                      toggleSidebar();
-                    }
-                  }}
-                >
-                  <span className="sidebar-icon">{item.icon}</span>
-                  <span>{item.title}</span>
-                </NavLink>
-              </motion.li>
-            ))}
-          </motion.ul>
-        </nav>
-
-        <div className="sidebar-footer">
-          <p>© 2025 Product Manager</p>
-        </div>
-      </motion.aside>
-    </>
+                }}
+              >
+                <span className="sidebar-icon" style={{ color: item.color }}>
+                  {item.icon}
+                </span>
+                <span>{item.title}</span>
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </aside>
   );
 };
 

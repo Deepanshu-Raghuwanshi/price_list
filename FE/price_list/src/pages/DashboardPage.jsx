@@ -8,7 +8,7 @@ import Header from "../components/Header";
 import Sidebar from "../components/Sidebar";
 import ProductList from "../components/ProductList";
 import ProductForm from "../components/ProductForm";
-import { FiPlus, FiLoader } from "react-icons/fi";
+import { FiLoader } from "react-icons/fi";
 import { motion, AnimatePresence } from "framer-motion";
 import "../styles/DashboardPage.css";
 
@@ -17,25 +17,24 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(window.innerWidth >= 1024);
+  const [sidebarOpen, setSidebarOpen] = useState(true);
 
   const { user } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
 
-  // Toggle sidebar
   const toggleSidebar = () => {
-    setSidebarOpen(!sidebarOpen);
+    if (window.innerWidth < 1024) {
+      setSidebarOpen(!sidebarOpen);
+    }
   };
 
-  // Fetch products on component mount
   useEffect(() => {
     if (user) {
       fetchProducts();
     }
   }, [user]);
 
-  // Redirect if not logged in
   useEffect(() => {
     if (!user && !loading) {
       navigate("/");
@@ -45,12 +44,14 @@ const DashboardPage = () => {
   // Handle window resize
   useEffect(() => {
     const handleResize = () => {
-      if (window.innerWidth < 1024) {
-        setSidebarOpen(false);
+      // On desktop, always show sidebar
+      if (window.innerWidth >= 1024) {
+        setSidebarOpen(true);
       }
     };
 
     window.addEventListener("resize", handleResize);
+    handleResize(); // Set initial state
     return () => window.removeEventListener("resize", handleResize);
   }, []);
 
@@ -67,11 +68,6 @@ const DashboardPage = () => {
     } finally {
       setLoading(false);
     }
-  };
-
-  const handleCreateProduct = () => {
-    setCurrentProduct(null);
-    setShowForm(true);
   };
 
   const handleEditProduct = (product) => {
@@ -132,8 +128,8 @@ const DashboardPage = () => {
 
   return (
     <div className="dashboard-container">
-      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
       <Header toggleSidebar={toggleSidebar} sidebarOpen={sidebarOpen} />
+      <Sidebar isOpen={sidebarOpen} toggleSidebar={toggleSidebar} />
 
       <div className={`dashboard-main ${sidebarOpen ? "sidebar-open" : ""}`}>
         <main className="dashboard-content">
@@ -163,23 +159,6 @@ const DashboardPage = () => {
                   exit={{ opacity: 0 }}
                   transition={{ duration: 0.4 }}
                 >
-                  <motion.div
-                    className="dashboard-actions"
-                    initial={{ opacity: 0, y: -20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ delay: 0.2 }}
-                  >
-                    <motion.button
-                      className="create-product-btn"
-                      onClick={handleCreateProduct}
-                      whileHover={{ scale: 1.05, y: -2 }}
-                      whileTap={{ scale: 0.95 }}
-                    >
-                      <FiPlus className="btn-icon" />
-                      <span>{t("product.create")}</span>
-                    </motion.button>
-                  </motion.div>
-
                   <ProductList
                     products={products}
                     onEdit={handleEditProduct}

@@ -1,25 +1,30 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "./LanguageSwitcher";
-import { FiLogOut, FiMenu } from "react-icons/fi";
+import { FiMenu } from "react-icons/fi";
 import { motion } from "framer-motion";
 import "../styles/Header.css";
 
 const Header = ({ toggleSidebar, sidebarOpen }) => {
-  const { user, logout } = useAuth();
+  const { user } = useAuth();
   const { t } = useLanguage();
+
+  const profile = {
+    name: "John Andre",
+    company: "Storfjord AS",
+    avatar: "/public/profile-avatar.png",
+  };
 
   return (
     <motion.header
-      className={`header ${
-        sidebarOpen && window.innerWidth >= 1024 ? "header-with-sidebar" : ""
-      }`}
+      className="header"
       initial={{ y: -100 }}
       animate={{ y: 0 }}
       transition={{ type: "spring", stiffness: 300, damping: 30 }}
     >
       <div className="header-content">
         <div className="header-left">
+          {/* Hamburger menu only visible on mobile */}
           <motion.button
             className="menu-button"
             onClick={toggleSidebar}
@@ -28,28 +33,31 @@ const Header = ({ toggleSidebar, sidebarOpen }) => {
           >
             <FiMenu />
           </motion.button>
-          <motion.h1
-            className="header-title"
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 0.2 }}
-          >
-            {t("dashboard.title")}
-          </motion.h1>
+
+          {/* Profile section - visible on desktop */}
+          <div className="profile-section">
+            <div className="profile-avatar">
+              {/* Fallback avatar if image is not available */}
+              {profile.avatar ? (
+                <img
+                  src={profile.avatar || "/placeholder.svg"}
+                  alt={profile.name}
+                />
+              ) : (
+                <div className="avatar-placeholder">
+                  {profile.name.charAt(0)}
+                </div>
+              )}
+            </div>
+            <div className="profile-info">
+              <div className="profile-name">{profile.name}</div>
+              <div className="profile-company">{profile.company}</div>
+            </div>
+          </div>
         </div>
+
         <div className="header-actions">
           <LanguageSwitcher />
-          {user && (
-            <motion.button
-              className="logout-btn"
-              onClick={logout}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <FiLogOut className="logout-icon" />
-              <span className="logout-text">{t("common.logout")}</span>
-            </motion.button>
-          )}
         </div>
       </div>
     </motion.header>
