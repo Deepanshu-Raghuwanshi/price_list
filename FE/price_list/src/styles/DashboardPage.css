@@ -49,7 +49,7 @@ body {
 .dashboard-container {
   display: flex;
   min-height: 100vh;
-  background-color: var(--background-alt);
+  background-color: #ffffff; /* Change to white */
   width: 100%;
   position: relative;
 }
@@ -62,6 +62,7 @@ body {
   flex-direction: column;
   min-height: 100vh;
   width: 100%;
+  background-color: #ffffff; /* Change to white */
 }
 
 /* On desktop, always show sidebar and adjust main content */
@@ -81,11 +82,12 @@ body {
 
 .dashboard-content {
   flex: 1;
-  padding: var(--space-4);
-  max-width: 1400px;
+  padding: 0; /* Remove padding */
+  max-width: 100%; /* Full width */
   margin: 0 auto;
   width: 100%;
   margin-top: var(--header-height); /* Match header height */
+  background-color: #ffffff; /* White background */
 }
 
 .dashboard-actions {
@@ -127,7 +129,7 @@ body {
   }
 
   .dashboard-content {
-    padding: var(--space-3);
+    padding: 0;
   }
 }
 
@@ -137,7 +139,7 @@ body {
   }
 
   .dashboard-content {
-    padding: var(--space-2);
+    padding: 0;
   }
 
   .dashboard-actions {

@@ -1,3 +1,5 @@
+"use client";
+
 import { useState } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import { FiSearch, FiMoreHorizontal } from "react-icons/fi";
@@ -18,7 +20,7 @@ const ProductList = ({ products, onEdit, onDelete }) => {
       name: "This is a test product with fifty characters this!",
       in_price: "900500",
       price: "1500800",
-      in_stock: "1500800",
+      in_stock: "2500600",
       unit: "kilometers/hour",
       description: "This is the description with fifty characters this",
     },
@@ -36,17 +38,21 @@ const ProductList = ({ products, onEdit, onDelete }) => {
       id: 3,
       name: "Sony DSLR 12345",
       article_number: "12345",
+      in_price: "10000",
       price: "15000",
       in_stock: "50",
       unit: "pcs",
+      description: "Professional camera with high resolution",
     },
     {
       id: 4,
       name: "Random product",
       article_number: "54321",
+      in_price: "1000",
       price: "1234",
       in_stock: "100",
       unit: "pcs",
+      description: "Generic product description",
     },
   ];
 
@@ -160,11 +166,17 @@ const ProductList = ({ products, onEdit, onDelete }) => {
       {/* Desktop/Tablet View */}
       <div className="product-list-desktop">
         <div className="product-table-header">
-          <div className="header-cell article-header">Article No.</div>
-          <div className="header-cell product-header">Product/Service</div>
+          <div className="header-cell article-header">
+            Article No. <span className="header-arrow">↓</span>
+          </div>
+          <div className="header-cell product-header">
+            Product/Service <span className="header-arrow">↓</span>
+          </div>
+          <div className="header-cell in-price-header">In Price</div>
           <div className="header-cell price-header">Price</div>
-          <div className="header-cell stock-header">In Stock</div>
           <div className="header-cell unit-header">Unit</div>
+          <div className="header-cell stock-header">In Stock</div>
+          <div className="header-cell description-header">Description</div>
           <div className="header-cell actions-header"></div>
         </div>
 
@@ -185,9 +197,15 @@ const ProductList = ({ products, onEdit, onDelete }) => {
                   {product.article_number}
                 </div>
                 <div className="table-cell name-cell">{product.name}</div>
+                <div className="table-cell in-price-cell">
+                  {product.in_price}
+                </div>
                 <div className="table-cell price-cell">{product.price}</div>
-                <div className="table-cell stock-cell">{product.in_stock}</div>
                 <div className="table-cell unit-cell">{product.unit}</div>
+                <div className="table-cell stock-cell">{product.in_stock}</div>
+                <div className="table-cell description-cell">
+                  {product.description}
+                </div>
                 <div className="table-cell actions-cell">
                   <button className="more-actions">
                     <FiMoreHorizontal />
