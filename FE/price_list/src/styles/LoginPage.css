@@ -111,6 +111,18 @@
   text-decoration: underline;
 }
 
+.terms-link {
+  color: #0078ff;
+  text-decoration: none;
+  font-weight: 500;
+  margin-top: 10px;
+  display: inline-block;
+}
+
+.terms-link:hover {
+  text-decoration: underline;
+}
+
 @media (max-width: 480px) {
   .login-form-container {
     padding: 24px;

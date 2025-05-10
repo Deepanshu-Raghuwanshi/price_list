@@ -49,6 +49,7 @@ class Translation {
       },
       { language: "en", key: "login.signupHere", value: "Sign up here" },
       { language: "en", key: "login.error", value: "Login failed" },
+      { language: "en", key: "login.viewTerms", value: "View Terms" },
 
       // Signup translations - English
       { language: "en", key: "signup.title", value: "Create Account" },
@@ -94,67 +95,100 @@ class Translation {
       },
       { language: "en", key: "common.logout", value: "Logout" },
 
-      // Spanish translations
-      { language: "es", key: "login.title", value: "Iniciar Sesión" },
-      { language: "es", key: "login.username", value: "Nombre de Usuario" },
-      { language: "es", key: "login.password", value: "Contraseña" },
-      { language: "es", key: "login.submit", value: "Iniciar Sesión" },
-      { language: "es", key: "login.loggingIn", value: "Iniciando sesión..." },
+      // Terms translations - English
+      { language: "en", key: "terms.title", value: "Terms" },
+      { language: "en", key: "terms.backToLogin", value: "Close and Go Back" },
       {
-        language: "es",
+        language: "en",
+        key: "terms.content",
+        value:
+          "BY clicking Invoice Now, you choose to register according to the information that you have typed in and the text on the registration page and the terms here, and you at the same time accept the terms here. You can use the program FOR FREE for 14 days. 123 Fakturera is so easy and self-explanatory that the chance that you will need support is minimal, but if you should need support, we are here for you, with our office manned for the most part of the day. After the trial period, the subscription continues and costs SEK 99 excluding VAT per month, which is billed annually. If you do not want to keep the program, just cancel the trial period by giving notice before 14 days from registration. You have of course the right to terminate the use of the program without any costs, by giving us notice per email before 14 days from registration, that you do not want to continue with the program, and you then of course do not pay anything. If we do not receive such a notice from you before 14 days from registration, then the order, for natural reasons, cannot be changed. With registration it is meant the date and time when you did choose to press the button Invoice Now. Billing is for one year at a time. The price for 123 Fakturera (offer price SEK 99 per month / ordinary price SEK 159 per month) is for the annual fee Start for one year's use of the program. (When using the offer price of SEK 99, the one-year period is calculated from registration.) All prices are excluding. VAT. Offer, Inventory Control, Member Invoicing, Multiuser version and English printout are (or can be) additional modules that can be ordered later. Intermediation, as well as invoicing, may take place from K-Soft Sverige AB, Box 2826, 187 28 Täby. In the future, we may choose to cooperate with another company for e.g. intermediation and invoicing. However, the customer relationship is with us. The payment is made to the company from which the invoice comes. The annual fee is on a continuous basis, but if you do not wish to continue using the program, all you have to do is give notice thirty days before the start of the next one-year period. The introductory offer ( SEK 99 per month) is for the annual fee Start for the first year. After the first year, the ordinary price is billed, which is currently, for annual fee Start, one hundred and fifty-nine kroner per month, for annual fee Remote control, three hundred kroner per month and for annual fee Pro, three hundred and thirty-three kroner per month. After one year, the annual Remote Control fee is invoiced as standard, but you can choose Start or Pro by giving notice at any time before the due date. If you choose to keep the program by not notifying us by email within 14 days of registration that you do not wish to continue with the program, you accept that you will pay the invoice for your order. Failure to pay the invoice or late payment does not give the right to cancel the order. We are happy to help you with logo at a cost price. License for the use of 123 Fakturera is of course sold in accordance with applicable laws. In order to be able to help you more easily and provide you with support, as well as to comply with the laws, we, for natural reasons, have to store your information. In connection with the storage of information, the law requires that we provide you with the following information: If you order as a private person, you have the right to cancel as stated by law. Your information is stored so that we can help you, etc. We will use it to be able to help you if you need help, follow the laws regarding bookkeeping, etc. When there are upgrades and the like, we may send you offers and the like about our products and services by email or the like. You may be contacted by email, post and telephone. If you don't want to be contacted, just send us an email about it. You can at any time ask not to be sent information about upgrades by email, letter or the like, and we will of course not do that. You send such a request to us by email, post or similar. For natural reasons, we have to store, process and move your data. Your information is stored until further notice. You give us permission to store, process and move your data, as well as to send you offers and the like by email, letter and the like. Due to the way it works with software, permission also needs to be given to other parties. The permission is therefore granted to us, as well as to the companies and/or person(s) who own the software, the source code, the website and the like. It is also given to current and future companies owned and/or controlled by one or more of those who currently own and/or control us. It is also given to current and future companies owned and/or controlled by one or more of those who currently own and/or control the companies (if any), which own or will own the software, source code, website and the like. It is also given to current and future persons (if any) who own or will own the software, source code, website and the like. This applies both to current and future products and services. It is also given to another company, (like K-Soft Sverige AB), which we can use to send/sell products, upgrades and the like, either by intermediation or otherwise. You of course have the right to request access to, change and deletion of the information we hold about you. You also have the right to request restriction of data processing, and to object to data processing and the right to data portability. You have the right to complain to the supervisory authority. You can find more legal information about us here. The laws of Ireland are the applicable laws. Placing an order is of course completely voluntary. Of course, we do not use any automated profiling or decisions. If you wish to contact us, please use the information on this website. Click on Invoice Now to register according to the information you have entered and the terms here. (Date and time of admission are entered automatically in our registers.) Our experience is that our customers are very satisfied with the way we work and hope and believe that this will also be your experience. Have a great day!",
+      },
+
+      // Swedish translations
+      { language: "sv", key: "login.title", value: "Logga in" },
+      { language: "sv", key: "login.username", value: "Användarnamn" },
+      { language: "sv", key: "login.password", value: "Lösenord" },
+      { language: "sv", key: "login.submit", value: "Logga in" },
+      { language: "sv", key: "login.loggingIn", value: "Loggar in..." },
+      {
+        language: "sv",
         key: "login.noAccount",
-        value: "¿No tienes una cuenta?",
+        value: "Har du inget konto?",
       },
-      { language: "es", key: "login.signupHere", value: "Regístrate aquí" },
-      { language: "es", key: "login.error", value: "Error al iniciar sesión" },
-
-      // Signup translations - Spanish
-      { language: "es", key: "signup.title", value: "Crear Cuenta" },
-      { language: "es", key: "signup.username", value: "Nombre de Usuario" },
-      { language: "es", key: "signup.password", value: "Contraseña" },
+      { language: "sv", key: "login.signupHere", value: "Registrera dig här" },
       {
-        language: "es",
+        language: "sv",
+        key: "login.error",
+        value: "Inloggningen misslyckades",
+      },
+      { language: "sv", key: "login.viewTerms", value: "Visa villkor" },
+
+      // Signup translations - Swedish
+      { language: "sv", key: "signup.title", value: "Skapa konto" },
+      { language: "sv", key: "signup.username", value: "Användarnamn" },
+      { language: "sv", key: "signup.password", value: "Lösenord" },
+      {
+        language: "sv",
         key: "signup.confirmPassword",
-        value: "Confirmar Contraseña",
+        value: "Bekräfta lösenord",
       },
-      { language: "es", key: "signup.submit", value: "Crear Cuenta" },
-      { language: "es", key: "signup.creating", value: "Creando Cuenta..." },
+      { language: "sv", key: "signup.submit", value: "Skapa konto" },
+      { language: "sv", key: "signup.creating", value: "Skapar konto..." },
       {
-        language: "es",
+        language: "sv",
         key: "signup.alreadyHaveAccount",
-        value: "¿Ya tienes una cuenta?",
+        value: "Har du redan ett konto?",
       },
-      { language: "es", key: "signup.loginHere", value: "Inicia sesión aquí" },
-      { language: "es", key: "signup.error", value: "Error al registrarse" },
+      { language: "sv", key: "signup.loginHere", value: "Logga in här" },
       {
-        language: "es",
+        language: "sv",
+        key: "signup.error",
+        value: "Registreringen misslyckades",
+      },
+      {
+        language: "sv",
         key: "signup.passwordsDoNotMatch",
-        value: "Las contraseñas no coinciden",
+        value: "Lösenorden matchar inte",
       },
 
-      { language: "es", key: "dashboard.title", value: "Panel de Productos" },
-      { language: "es", key: "product.create", value: "Crear Producto" },
+      { language: "sv", key: "dashboard.title", value: "Produktöversikt" },
+      { language: "sv", key: "product.create", value: "Skapa produkt" },
       {
-        language: "es",
+        language: "sv",
         key: "product.articleNumber",
-        value: "Número de Artículo",
+        value: "Artikelnummer",
       },
-      { language: "es", key: "product.name", value: "Producto/Servicio" },
-      { language: "es", key: "product.inPrice", value: "Precio de Entrada" },
-      { language: "es", key: "product.price", value: "Precio" },
-      { language: "es", key: "product.unit", value: "Unidad" },
-      { language: "es", key: "product.inStock", value: "En Existencia" },
-      { language: "es", key: "product.description", value: "Descripción" },
-      { language: "es", key: "product.save", value: "Guardar" },
-      { language: "es", key: "product.cancel", value: "Cancelar" },
-      { language: "es", key: "product.edit", value: "Editar" },
-      { language: "es", key: "product.delete", value: "Eliminar" },
+      { language: "sv", key: "product.name", value: "Produkt/Tjänst" },
+      { language: "sv", key: "product.inPrice", value: "Inpris" },
+      { language: "sv", key: "product.price", value: "Pris" },
+      { language: "sv", key: "product.unit", value: "Enhet" },
+      { language: "sv", key: "product.inStock", value: "I lager" },
+      { language: "sv", key: "product.description", value: "Beskrivning" },
+      { language: "sv", key: "product.save", value: "Spara" },
+      { language: "sv", key: "product.cancel", value: "Avbryt" },
+      { language: "sv", key: "product.edit", value: "Redigera" },
+      { language: "sv", key: "product.delete", value: "Ta bort" },
       {
-        language: "es",
+        language: "sv",
         key: "product.noProducts",
-        value: "No se encontraron productos. ¡Crea tu primer producto!",
+        value: "Inga produkter hittades. Skapa din första produkt!",
       },
-      { language: "es", key: "common.logout", value: "Cerrar Sesión" },
+      { language: "sv", key: "common.logout", value: "Logga ut" },
+
+      // Terms translations - Swedish
+      { language: "sv", key: "terms.title", value: "Villkor" },
+      {
+        language: "sv",
+        key: "terms.backToLogin",
+        value: "Stäng och gå tillbaka",
+      },
+      {
+        language: "sv",
+        key: "terms.content",
+        value:
+          "GENOM att klicka på Fakturera Nu, väljer du att registrera dig enligt den information som du har skrivit in och texten på registreringssidan och villkoren här, och du accepterar samtidigt villkoren här. Du kan använda programmet GRATIS i 14 dagar. 123 Fakturera är så enkelt och självförklarande att chansen att du kommer att behöva support är minimal, men om du skulle behöva support, finns vi här för dig, med vårt kontor bemannat för större delen av dagen. Efter provperioden fortsätter prenumerationen och kostar 99 SEK exklusive moms per månad, som faktureras årligen. Om du inte vill behålla programmet, avbryt bara provperioden genom att meddela innan 14 dagar från registreringen. Du har naturligtvis rätt att avsluta användningen av programmet utan några kostnader, genom att meddela oss per e-post innan 14 dagar från registreringen, att du inte vill fortsätta med programmet, och du betalar då naturligtvis ingenting. Om vi inte får ett sådant meddelande från dig innan 14 dagar från registreringen, kan beställningen av naturliga skäl inte ändras. Med registrering menas det datum och den tid då du valde att trycka på knappen Fakturera Nu. Fakturering sker för ett år i taget. Priset för 123 Fakturera (erbjudandepris 99 kr per månad / ordinarie pris 159 kr per månad) är för årsavgiften Start för ett års användning av programmet. (Vid användning av erbjudandepriset på 99 kr beräknas ettårsperioden från registreringen.) Alla priser är exkl. moms. Erbjudande, Lagerkontroll, Medlemsfakturering, Fleranvändarversion och Engelsk utskrift är (eller kan vara) tilläggsmoduler som kan beställas senare. Förmedling, liksom fakturering, kan ske från K-Soft Sverige AB, Box 2826, 187 28 Täby. I framtiden kan vi välja att samarbeta med ett annat företag för t.ex. förmedling och fakturering. Kundrelationen är dock med oss. Betalningen görs till det företag från vilket fakturan kommer. Årsavgiften löper kontinuerligt, men om du inte vill fortsätta använda programmet behöver du bara meddela trettio dagar före starten av nästa ettårsperiod. Introduktionserbjudandet (99 kr per månad) är för årsavgiften Start för det första året. Efter det första året faktureras det ordinarie priset, vilket för närvarande är, för årsavgift Start, etthundrafemtionio kronor per månad, för årsavgift Fjärrstyrning, trehundra kronor per månad och för årsavgift Pro, trehundratrettiotre kronor per månad. Efter ett år faktureras årsavgiften Fjärrstyrning som standard, men du kan välja Start eller Pro genom att meddela när som helst före förfallodagen. Om du väljer att behålla programmet genom att inte meddela oss via e-post inom 14 dagar från registreringen att du inte vill fortsätta med programmet, accepterar du att du kommer att betala fakturan för din beställning. Underlåtenhet att betala fakturan eller sen betalning ger inte rätt att avbryta beställningen. Vi hjälper gärna till med logotyp till självkostnadspris. Licens för användning av 123 Fakturera säljs naturligtvis i enlighet med gällande lagar. För att kunna hjälpa dig enklare och ge dig support, samt för att följa lagarna, måste vi av naturliga skäl lagra din information. I samband med lagringen av information kräver lagen att vi ger dig följande information: Om du beställer som privatperson har du rätt att avbeställa enligt lag. Din information lagras så att vi kan hjälpa dig etc. Vi kommer att använda den för att kunna hjälpa dig om du behöver hjälp, följa lagarna om bokföring etc. När det finns uppgraderingar och liknande kan vi skicka erbjudanden och liknande om våra produkter och tjänster via e-post eller liknande. Du kan bli kontaktad via e-post, post och telefon. Om du inte vill bli kontaktad, skicka bara ett e-postmeddelande om det. Du kan när som helst be om att inte få information om uppgraderingar via e-post, brev eller liknande, och vi kommer naturligtvis inte att göra det. Du skickar en sådan begäran till oss via e-post, post eller liknande. Av naturliga skäl måste vi lagra, bearbeta och flytta dina data. Din information lagras tills vidare. Du ger oss tillstånd att lagra, bearbeta och flytta dina data, samt att skicka erbjudanden och liknande via e-post, brev och liknande. På grund av hur det fungerar med programvara behöver tillstånd också ges till andra parter. Tillståndet ges därför till oss, samt till de företag och/eller person(er) som äger programvaran, källkoden, webbplatsen och liknande. Det ges också till nuvarande och framtida företag som ägs och/eller kontrolleras av en eller flera av dem som för närvarande äger och/eller kontrollerar oss. Det ges också till nuvarande och framtida företag som ägs och/eller kontrolleras av en eller flera av dem som för närvarande äger och/eller kontrollerar företagen (om några), som äger eller kommer att äga programvaran, källkoden, webbplatsen och liknande. Det ges också till nuvarande och framtida personer (om några) som äger eller kommer att äga programvaran, källkoden, webbplatsen och liknande. Detta gäller både för nuvarande och framtida produkter och tjänster. Det ges också till ett annat företag, (som K-Soft Sverige AB), som vi kan använda för att skicka/sälja produkter, uppgraderingar och liknande, antingen genom förmedling eller på annat sätt. Du har naturligtvis rätt att begära tillgång till, ändring och radering av den information vi har om dig. Du har också rätt att begära begränsning av databehandling, och att invända mot databehandling och rätten till dataportabilitet. Du har rätt att klaga till tillsynsmyndigheten. Du kan hitta mer juridisk information om oss här. Irlands lagar är de tillämpliga lagarna. Att lägga en beställning är naturligtvis helt frivilligt. Vi använder naturligtvis inte någon automatiserad profilering eller beslut. Om du vill kontakta oss, använd informationen på denna webbplats. Klicka på Fakturera Nu för att registrera enligt den information du har angett och villkoren här. (Datum och tid för antagning registreras automatiskt i våra register.) Vår erfarenhet är att våra kunder är mycket nöjda med vårt arbetssätt och hoppas och tror att detta också kommer att bli din upplevelse. Ha en bra dag!",
+      },
     ];
 
     try {

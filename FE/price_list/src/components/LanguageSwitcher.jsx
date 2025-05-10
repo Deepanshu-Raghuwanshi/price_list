@@ -31,12 +31,12 @@ const LanguageSwitcher = () => {
     {
       code: "en",
       name: "English",
-      flag: "/en-flag.png",
+      flag: "https://storage.123fakturere.no/public/flags/GB.png",
     },
     {
-      code: "es",
-      name: "Español",
-      flag: "/flag-es.png",
+      code: "sv",
+      name: "Svenska",
+      flag: "https://storage.123fakturere.no/public/flags/SE.png",
     },
   ];
 

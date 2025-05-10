@@ -6,10 +6,10 @@ exports.getTranslations = async (req, res) => {
     const { language } = req.params;
 
     // Validate language parameter
-    if (!language || !["en", "es"].includes(language)) {
+    if (!language || !["en", "sv"].includes(language)) {
       return res.status(400).json({
         success: false,
-        message: "Valid language parameter (en or es) is required",
+        message: "Valid language parameter (en or sv) is required",
       });
     }
 
@@ -35,10 +35,10 @@ exports.updateTranslation = async (req, res) => {
     const { value } = req.body;
 
     // Validate parameters
-    if (!language || !["en", "es"].includes(language)) {
+    if (!language || !["en", "sv"].includes(language)) {
       return res.status(400).json({
         success: false,
-        message: "Valid language parameter (en or es) is required",
+        message: "Valid language parameter (en or sv) is required",
       });
     }
 

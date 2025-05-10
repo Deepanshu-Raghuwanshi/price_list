@@ -140,6 +140,11 @@ const LoginPage = () => {
               {t("login.signupHere")}
             </Link>
           </p>
+          <p>
+            <Link to="/terms" className="terms-link">
+              {t("login.viewTerms")}
+            </Link>
+          </p>
         </motion.div>
       </motion.div>
     </div>
