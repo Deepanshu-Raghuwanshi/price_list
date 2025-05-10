@@ -1,11 +1,12 @@
 import { useAuth } from "../contexts/AuthContext";
 import { useLanguage } from "../contexts/LanguageContext";
-import { NavLink } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import "../styles/Sidebar.css";
 
 const Sidebar = ({ isOpen, toggleSidebar }) => {
-  const { user } = useAuth();
+  const { user, logout } = useAuth();
   const { t } = useLanguage();
+  const navigate = useNavigate();
 
   const menuItems = [
     {
@@ -78,8 +79,9 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
     {
       title: "Log out",
       icon: "🚪",
-      path: "/logout",
+      path: "#", // Changed from "/logout" to "#" to prevent navigation
       color: "#ced4da",
+      isLogout: true, // Add a flag to identify this as the logout item
     },
   ];
 
@@ -107,7 +109,13 @@ const Sidebar = ({ isOpen, toggleSidebar }) => {
                 className={({ isActive }) =>
                   isActive ? "sidebar-link active" : "sidebar-link"
                 }
-                onClick={() => {
+                onClick={(e) => {
+                  if (item.isLogout) {
+                    e.preventDefault(); // Prevent default navigation
+                    logout(); // Call the logout function
+                    navigate("/"); // Navigate to login page after logout
+                  }
+
                   if (window.innerWidth < 1024) {
                     toggleSidebar();
                   }

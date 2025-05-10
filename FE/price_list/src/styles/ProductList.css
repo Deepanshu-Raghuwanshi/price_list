@@ -142,8 +142,13 @@
   gap: 8px;
 }
 
-.product-row.selected .product-cell {
+.product-row.selected .product-cell:not(.editing) {
   border-color: #0078ff;
+}
+
+.product-row.editing-row .product-cell.editing {
+  border-color: #0078ff;
+  box-shadow: 0 0 0 2px rgba(0, 120, 255, 0.1);
 }
 
 .row-indicator {
@@ -164,6 +169,7 @@
   padding: 12px 16px;
   display: flex;
   align-items: center;
+  position: relative;
 }
 
 .product-name-cell {
@@ -181,10 +187,14 @@
   gap: 8px;
 }
 
+.price-value {
+  flex: 1;
+}
+
 .more-actions {
   background: none;
   border: none;
-  color: #888;
+  color: #0078ff;
   cursor: pointer;
   padding: 4px;
   border-radius: 4px;
@@ -195,7 +205,7 @@
 
 .more-actions:hover {
   background-color: #f0f0f0;
-  color: #333;
+  color: #0062cc;
 }
 
 .no-products {
@@ -267,7 +277,8 @@
 }
 
 .actions-header {
-  width: 40px;
+  width: 100px;
+  text-align: center;
 }
 
 .product-table-body {
@@ -285,8 +296,13 @@
   cursor: pointer;
 }
 
-.product-table-row.selected .table-cell {
+.product-table-row.selected .table-cell:not(.editing) {
   border-color: #0078ff;
+}
+
+.product-table-row.editing-row .table-cell.editing {
+  border-color: #0078ff;
+  box-shadow: 0 0 0 2px rgba(0, 120, 255, 0.1);
 }
 
 .product-table-row .row-indicator {
@@ -311,6 +327,63 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  position: relative;
+  min-height: 48px;
+}
+
+.table-cell.editing {
+  padding: 0;
+  overflow: visible;
+}
+
+.edit-input {
+  width: 100%;
+  height: 100%;
+  padding: 12px 16px;
+  border: none;
+  background: transparent;
+  font-size: 14px;
+  outline: none;
+  border-radius: 50px;
+}
+
+.row-edit-actions {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.edit-action-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+  color: white;
+  font-size: 16px;
+}
+
+.save-btn {
+  background-color: #00e676;
+}
+
+.cancel-btn {
+  background-color: #ff5252;
+}
+
+.edit-action-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.cell-content {
+  width: 100%;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
@@ -354,7 +427,7 @@
 }
 
 .actions-cell {
-  width: 40px;
+  width: 100px;
   padding: 0;
   justify-content: center;
 }
@@ -427,6 +500,17 @@
     padding: 0;
     justify-content: center;
   }
+
+  .edit-input {
+    font-size: 13px;
+    padding: 10px 14px;
+  }
+
+  .edit-action-btn {
+    width: 32px;
+    height: 32px;
+    font-size: 14px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -453,11 +537,18 @@
   .product-cell {
     padding: 10px 14px;
     font-size: 14px;
+    min-height: 40px;
   }
 
   .row-indicator {
     left: -12px;
     font-size: 18px;
+  }
+
+  .edit-action-btn {
+    width: 28px;
+    height: 28px;
+    font-size: 12px;
   }
 }
 

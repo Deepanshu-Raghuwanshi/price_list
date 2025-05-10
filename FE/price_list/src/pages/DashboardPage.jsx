@@ -17,24 +17,27 @@ const DashboardPage = () => {
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
-  const [sidebarOpen, setSidebarOpen] = useState(true);
+  const [sidebarOpen, setSidebarOpen] = useState(true); // Default to open on all screen sizes
 
   const { user } = useAuth();
   const { t } = useLanguage();
   const navigate = useNavigate();
 
+  // Toggle sidebar - only used on mobile
   const toggleSidebar = () => {
     if (window.innerWidth < 1024) {
       setSidebarOpen(!sidebarOpen);
     }
   };
 
+  // Fetch products on component mount
   useEffect(() => {
     if (user) {
       fetchProducts();
     }
   }, [user]);
 
+  // Redirect if not logged in
   useEffect(() => {
     if (!user && !loading) {
       navigate("/");
@@ -122,6 +125,12 @@ const DashboardPage = () => {
     setShowForm(false);
   };
 
+  const handleProductUpdated = (updatedProduct) => {
+    setProducts(
+      products.map((p) => (p.id === updatedProduct.id ? updatedProduct : p))
+    );
+  };
+
   if (!user) {
     return null;
   }
@@ -163,6 +172,7 @@ const DashboardPage = () => {
                     products={products}
                     onEdit={handleEditProduct}
                     onDelete={handleDeleteProduct}
+                    onProductUpdated={handleProductUpdated}
                   />
                 </motion.div>
               )}
