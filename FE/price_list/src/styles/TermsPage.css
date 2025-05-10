@@ -67,8 +67,7 @@
   }
 
   .diamond-icon-container {
-    top: 20px;
-    left: 70px;
+    display: none;
   }
 }
 
@@ -265,16 +264,9 @@
     margin-left: auto;
   }
 
+  /* Hide diamond icon completely on mobile */
   .diamond-icon-container {
-    top: 15px;
-    left: 60px;
-    transition: opacity 0.3s ease;
-    z-index: 10;
-  }
-
-  .nav-links.open ~ .diamond-icon-container {
-    opacity: 0;
-    pointer-events: none;
+    display: none;
   }
 }
 

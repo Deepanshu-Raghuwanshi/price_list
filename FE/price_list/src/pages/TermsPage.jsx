@@ -9,11 +9,11 @@ const TermsPage = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const handleBackToLogin = () => {
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const handleDiamondClick = () => {
-    window.location.href = "/login";
+    window.location.href = "/";
   };
 
   const toggleMenu = () => {
@@ -51,16 +51,14 @@ const TermsPage = () => {
         </div>
       </div>
 
-      {!isMenuOpen && ( // Only show diamond when menu is closed
-        <div className="diamond-icon-container">
-          <img
-            src="https://storage.123fakturera.se/public/icons/diamond.png"
-            alt="Diamond"
-            className="diamond-icon"
-            onClick={handleDiamondClick}
-          />
-        </div>
-      )}
+      <div className="diamond-icon-container">
+        <img
+          src="https://storage.123fakturera.se/public/icons/diamond.png"
+          alt="Diamond"
+          className="diamond-icon"
+          onClick={handleDiamondClick}
+        />
+      </div>
 
       <motion.div
         initial={{ opacity: 0, y: 30 }}
