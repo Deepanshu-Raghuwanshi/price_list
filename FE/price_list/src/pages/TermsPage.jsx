@@ -46,6 +46,22 @@ const TermsPage = () => {
   // Initialize viewport height fix for mobile
   useEffect(() => {
     initViewportHeightFix();
+
+    // Add specific handling for the first scroll event
+    const handleFirstScroll = () => {
+      // Force the background to extend beyond viewport
+      document.body.style.backgroundColor = "#000";
+      document.documentElement.style.backgroundColor = "#000";
+
+      // Remove the event listener after first scroll
+      window.removeEventListener("scroll", handleFirstScroll);
+    };
+
+    window.addEventListener("scroll", handleFirstScroll, { passive: true });
+
+    return () => {
+      window.removeEventListener("scroll", handleFirstScroll);
+    };
   }, []);
 
   return (

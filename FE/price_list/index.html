@@ -19,8 +19,8 @@
         height: calc(var(--vh, 1vh) * 100);
         margin: 0;
         padding: 0;
-        background-color: #000; /* Match background color */
-        overscroll-behavior-y: none; /* Prevent bounce effect */
+        background-color: transparent; /* Allow background image to show */
+        overscroll-behavior-y: contain; /* Less restrictive than 'none' */
       }
       body {
         height: 100%;
@@ -29,7 +29,7 @@
         padding: 0;
         overflow-x: hidden;
         overflow-y: auto; /* Enable scrolling */
-        background-color: #000; /* Match background color */
+        background-color: transparent; /* Allow background image to show */
         position: relative; /* Create stacking context */
       }
       /* Hide scrollbar for Chrome, Safari and Opera */
@@ -63,8 +63,8 @@
     <script>
       // Handle mobile viewport issues with URL bar
       (function () {
+        // Set the --vh custom property based on the actual viewport height
         function setVhProperty() {
-          // Set the --vh custom property based on the actual viewport height
           const vh = window.innerHeight * 0.01;
           document.documentElement.style.setProperty("--vh", `${vh}px`);
         }
@@ -72,45 +72,49 @@
         // Set it on initial load
         setVhProperty();
 
+        // Create a div that extends beyond the viewport to prevent white space
+        function createBackgroundExtension() {
+          // Don't create the extension as it blocks the background image
+        }
+
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
           // For mobile devices
           window.addEventListener("load", function () {
+            // Create background extension to prevent white space
+            createBackgroundExtension();
+
             // Initial setup
             setVhProperty();
+
+            // Don't apply transforms that might interfere with scrolling
 
             // Force a small scroll to normalize the URL bar state
             setTimeout(function () {
               window.scrollTo(0, 1);
-              // Update vh after scroll
               setTimeout(setVhProperty, 50);
             }, 0);
 
             // Handle scroll events
             let lastScrollPosition = 0;
             let isFirstScroll = true;
+            let scrollTimer = null;
 
             window.addEventListener(
               "scroll",
               function () {
+                // Clear any existing timer
+                clearTimeout(scrollTimer);
+
                 // Special handling for first scroll (when URL bar typically hides)
                 if (isFirstScroll) {
-                  requestAnimationFrame(function () {
-                    setVhProperty();
-                    // Force background to cover any potential white space
-                    document.body.style.backgroundColor = "#000";
-                    document.documentElement.style.backgroundColor = "#000";
-                    isFirstScroll = false;
-                  });
+                  // Just mark as scrolled without changing background color
+                  isFirstScroll = false;
                 }
 
-                // Handle URL bar showing (scrolling up)
-                if (window.scrollY < lastScrollPosition) {
-                  requestAnimationFrame(function () {
-                    setVhProperty();
-                    document.body.style.backgroundColor = "#000";
-                    document.documentElement.style.backgroundColor = "#000";
-                  });
-                }
+                // Set a timer to update after scrolling stops
+                scrollTimer = setTimeout(function () {
+                  setVhProperty();
+                }, 100);
 
                 lastScrollPosition = window.scrollY;
               },
@@ -118,12 +122,23 @@
             );
 
             // Update on resize and orientation change
-            window.addEventListener("resize", setVhProperty, { passive: true });
+            window.addEventListener(
+              "resize",
+              function () {
+                setVhProperty();
+                // Don't set background color to allow image to show
+              },
+              { passive: true }
+            );
+
             window.addEventListener(
               "orientationchange",
               function () {
                 // Delay to ensure correct height after orientation change
-                setTimeout(setVhProperty, 100);
+                setTimeout(function () {
+                  setVhProperty();
+                  // Don't set background color to allow image to show
+                }, 100);
               },
               { passive: true }
             );

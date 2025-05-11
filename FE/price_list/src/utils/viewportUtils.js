@@ -12,10 +12,31 @@ export const setViewportHeight = () => {
   document.documentElement.style.setProperty("--vh", `${vh}px`);
 };
 
+// Create a background extension to prevent white space
+export const createBackgroundExtension = () => {
+  // Don't create the extension as it blocks the background image
+};
+
+// Fix for background image shifting during scroll
+export const fixBackgroundShift = () => {
+  // Apply to terms-container if it exists
+  const termsContainer = document.querySelector(".terms-container");
+  if (termsContainer) {
+    // Don't set background color to allow image to show
+    // Don't apply transforms that might interfere with scrolling
+  }
+};
+
 // Initialize viewport height handler
 export const initViewportHeightFix = () => {
   // Set the height initially
   setViewportHeight();
+
+  // Create background extension
+  createBackgroundExtension();
+
+  // Fix background shift
+  fixBackgroundShift();
 
   // Update the height on resize
   window.addEventListener("resize", setViewportHeight);
@@ -25,16 +46,23 @@ export const initViewportHeightFix = () => {
 
   // Handle the first scroll issue specifically
   let hasScrolled = false;
+  let scrollTimer = null;
+
   window.addEventListener(
     "scroll",
     () => {
+      // Clear any existing timer
+      clearTimeout(scrollTimer);
+
       if (!hasScrolled) {
-        // Force a reflow on first scroll
-        requestAnimationFrame(() => {
-          setViewportHeight();
-          hasScrolled = true;
-        });
+        // Just mark as scrolled without changing background color
+        hasScrolled = true;
       }
+
+      // Set a timer to update after scrolling stops
+      scrollTimer = setTimeout(() => {
+        setViewportHeight();
+      }, 100);
     },
     { passive: true }
   );

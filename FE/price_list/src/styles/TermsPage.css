@@ -39,7 +39,7 @@
   background-image: url("https://storage.123fakturera.se/public/wallpapers/sverige43.jpg");
   background-size: cover;
   background-position: center;
-  background-attachment: fixed;
+  background-attachment: fixed; /* Keep fixed for desktop */
   background-repeat: no-repeat;
   display: flex;
   flex-direction: column;
@@ -55,7 +55,11 @@
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  /* Set a transparent background to allow the image to show through */
+  background-color: transparent;
 }
+
+/* Remove the pseudo-element that was blocking the background image */
 
 .navigation {
   width: 100%;
@@ -208,6 +212,7 @@ body {
   overscroll-behavior-y: contain; /* Less restrictive than 'none' */
   height: 100%; /* Ensure full height */
   overflow-x: hidden; /* Prevent horizontal scrolling */
+  background-color: transparent; /* Allow background image to show through */
 }
 
 /* Fix for iOS Safari and other mobile browsers */
@@ -333,6 +338,8 @@ body {
     ); /* Use safe area inset if available */
     position: relative;
     z-index: 0; /* Ensure proper stacking context */
+    background-attachment: scroll; /* Use scroll on mobile to prevent issues */
+    background-color: transparent; /* Ensure background image is visible */
   }
 
   .nav-links {
