@@ -51,7 +51,18 @@
         #root {
           height: -webkit-fill-available;
         }
-        /* We don't need the gradient anymore */
+        /* Add an invisible fixed element to prevent white space on iOS */
+        body::after {
+          content: "";
+          position: fixed;
+          bottom: 0;
+          left: 0;
+          right: 0;
+          height: 300px;
+          background-color: transparent; /* Completely transparent */
+          pointer-events: none;
+          z-index: 9999;
+        }
       }
     </style>
   </head>
@@ -67,7 +78,19 @@
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
           // For mobile devices
           window.addEventListener("load", function () {
-            // We don't need the gradient anymore
+            // Create an invisible fixed element to prevent white space
+            const fixedElement = document.createElement("div");
+            fixedElement.style.cssText = `
+              position: fixed;
+              bottom: 0;
+              left: 0;
+              right: 0;
+              height: 300px;
+              background-color: transparent; /* Completely transparent */
+              pointer-events: none;
+              z-index: 9999;
+            `;
+            document.body.appendChild(fixedElement);
 
             // Force a small scroll to normalize the URL bar state
             setTimeout(function () {

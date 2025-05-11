@@ -58,7 +58,18 @@
   background-color: transparent;
 }
 
-/* We don't need the gradient anymore */
+/* Add an invisible fixed element to prevent white space */
+.terms-container::after {
+  content: "";
+  position: fixed; /* Fixed position will resize with URL bar */
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px; /* Extend beyond the bottom of the viewport */
+  background-color: transparent; /* Completely transparent */
+  pointer-events: none; /* Allow interaction with elements underneath */
+  z-index: -1;
+}
 
 .navigation {
   width: 100%;
@@ -226,7 +237,10 @@ body {
     padding-bottom: 50px !important;
   }
 
-  /* We don't need the gradient anymore */
+  /* Enhance the invisible fixed element for iOS */
+  .terms-container::after {
+    height: 400px !important; /* Even taller for iOS */
+  }
 }
 
 /* Media Queries */
@@ -349,7 +363,10 @@ body {
     background-position: center; /* Center the background image */
   }
 
-  /* We don't need the gradient anymore */
+  /* Enhance the invisible fixed element for mobile */
+  .terms-container::after {
+    height: 300px; /* Taller for mobile */
+  }
 
   .nav-links {
     left: 0;

@@ -12,7 +12,19 @@
 // Initialize viewport height handler
 export const initViewportHeightFix = () => {
   if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
-    // We don't need the gradient anymore
+    // Create an invisible fixed element to prevent white space
+    const fixedElement = document.createElement("div");
+    fixedElement.style.cssText = `
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 300px;
+      background-color: transparent; /* Completely transparent */
+      pointer-events: none;
+      z-index: 9999;
+    `;
+    document.body.appendChild(fixedElement);
 
     // Force a small scroll to normalize the URL bar state
     setTimeout(() => {
