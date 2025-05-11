@@ -54,16 +54,6 @@
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
-  /* Prevent background shift */
-  transform: translateZ(0); /* Hardware acceleration */
-  -webkit-transform: translateZ(0);
-  backface-visibility: hidden; /* Prevent background shift */
-  -webkit-backface-visibility: hidden;
-  perspective: 1000px; /* Prevent background shift */
-  -webkit-perspective: 1000px;
-  /* Prevent overscroll */
-  overscroll-behavior: none;
-  -webkit-overflow-scrolling: auto;
 }
 
 .navigation {
@@ -214,25 +204,7 @@
 /* Prevent overscroll behavior that causes white space */
 html,
 body {
-  overscroll-behavior-y: none;
-}
-
-/* Additional fix for background image shift */
-@media (max-width: 768px) {
-  body {
-    background-color: #000; /* Match background color to prevent white flash */
-  }
-
-  .terms-container::after {
-    content: "";
-    position: fixed;
-    bottom: -50px; /* Extend below viewport */
-    left: 0;
-    right: 0;
-    height: 50px; /* Extra space to prevent white flash */
-    background-color: #000; /* Match your background or a color that blends with your background image */
-    z-index: -1;
-  }
+  overscroll-behavior-y: contain; /* Less restrictive than 'none' */
 }
 
 /* Media Queries */
@@ -340,18 +312,10 @@ body {
     z-index: 1; /* Lower z-index to ensure it scrolls with page */
   }
 
-  /* Ensure the terms container takes up the right amount of space */
+  /* Simple fix for mobile */
   .terms-container {
-    min-height: 100vh; /* Exactly viewport height to prevent extra white space */
-    box-sizing: border-box; /* Include padding in the height calculation */
-    padding-bottom: 0; /* No extra padding at bottom */
-    margin-bottom: 0; /* No margin at bottom */
-  }
-
-  /* Ensure the last element doesn't create extra space */
-  .terms-content-wrapper {
-    padding-bottom: 0;
-    margin-bottom: 0;
+    min-height: 100vh;
+    padding-bottom: 1px; /* Small padding to prevent white space */
   }
 
   .nav-links {

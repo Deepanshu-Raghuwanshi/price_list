@@ -22,7 +22,7 @@
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-        overflow-y: scroll; /* Enable scrolling */
+        overflow-y: auto; /* Enable scrolling */
         background-color: #000; /* Match background color */
       }
       /* Hide scrollbar for Chrome, Safari and Opera */
@@ -33,26 +33,10 @@
       body {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
-        overscroll-behavior-y: none; /* Prevent bounce effect */
       }
       #root {
         min-height: 100%;
         -webkit-overflow-scrolling: touch;
-        position: relative; /* Ensure proper stacking */
-      }
-      /* Prevent white space at bottom */
-      @media (max-width: 768px) {
-        body::after {
-          content: "";
-          display: block;
-          position: fixed;
-          bottom: -50px;
-          left: 0;
-          right: 0;
-          height: 50px;
-          background-color: #000;
-          z-index: -1;
-        }
       }
     </style>
   </head>
@@ -67,51 +51,25 @@
           // For mobile devices
           document.documentElement.style.height = "100vh";
 
-          // Add a small amount of extra space to ensure scrolling without visible white space
+          // Simple fix to ensure URL bar scrolls with the page
           window.addEventListener("load", function () {
-            // Create a hidden spacer that's just enough to enable scrolling
-            const spacer = document.createElement("div");
-            spacer.id = "scroll-spacer";
-            spacer.style.height = "1px";
-            spacer.style.opacity = "0";
-            spacer.style.position = "absolute";
-            spacer.style.bottom = "0";
-            spacer.style.left = "0";
-            spacer.style.width = "100%";
-            document.body.appendChild(spacer);
+            // Force a small scroll to show the URL bar initially
+            setTimeout(function () {
+              window.scrollTo(0, 1);
+            }, 0);
 
-            // Handle scrolling to prevent white space at bottom
-            window.addEventListener("scroll", function () {
-              // If we're near the bottom
-              if (
-                window.innerHeight + window.scrollY >=
-                document.body.offsetHeight - 50
-              ) {
-                // Prevent overscroll
-                document.body.style.overscrollBehavior = "none";
-              } else {
-                document.body.style.overscrollBehavior = "auto";
-              }
-            });
-
-            // Fix for background shift on fast scroll
-            document.addEventListener(
+            // Fix for white space when URL bar moves
+            let lastScrollPosition = 0;
+            window.addEventListener(
               "scroll",
               function () {
-                // Force redraw to prevent background shift
-                requestAnimationFrame(function () {
-                  // If we're at the bottom, prevent further scrolling
-                  if (
-                    window.innerHeight + window.pageYOffset >=
-                    document.body.offsetHeight
-                  ) {
-                    // Prevent scrolling beyond content
-                    window.scrollTo(
-                      0,
-                      document.body.offsetHeight - window.innerHeight
-                    );
-                  }
-                });
+                // Check if we're scrolling up (URL bar appearing)
+                if (window.scrollY < lastScrollPosition) {
+                  // Force background to cover any potential white space
+                  document.body.style.backgroundColor = "#000";
+                  document.documentElement.style.backgroundColor = "#000";
+                }
+                lastScrollPosition = window.scrollY;
               },
               { passive: true }
             );
