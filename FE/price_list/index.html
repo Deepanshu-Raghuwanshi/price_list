@@ -15,6 +15,7 @@
         height: 100%;
         margin: 0;
         padding: 0;
+        background-color: #000; /* Match background color */
       }
       body {
         height: 100%;
@@ -22,6 +23,7 @@
         padding: 0;
         overflow-x: hidden;
         overflow-y: scroll; /* Enable scrolling */
+        background-color: #000; /* Match background color */
       }
       /* Hide scrollbar for Chrome, Safari and Opera */
       body::-webkit-scrollbar {
@@ -31,10 +33,26 @@
       body {
         -ms-overflow-style: none; /* IE and Edge */
         scrollbar-width: none; /* Firefox */
+        overscroll-behavior-y: none; /* Prevent bounce effect */
       }
       #root {
         min-height: 100%;
         -webkit-overflow-scrolling: touch;
+        position: relative; /* Ensure proper stacking */
+      }
+      /* Prevent white space at bottom */
+      @media (max-width: 768px) {
+        body::after {
+          content: "";
+          display: block;
+          position: fixed;
+          bottom: -50px;
+          left: 0;
+          right: 0;
+          height: 50px;
+          background-color: #000;
+          z-index: -1;
+        }
       }
     </style>
   </head>
@@ -75,6 +93,28 @@
                 document.body.style.overscrollBehavior = "auto";
               }
             });
+
+            // Fix for background shift on fast scroll
+            document.addEventListener(
+              "scroll",
+              function () {
+                // Force redraw to prevent background shift
+                requestAnimationFrame(function () {
+                  // If we're at the bottom, prevent further scrolling
+                  if (
+                    window.innerHeight + window.pageYOffset >=
+                    document.body.offsetHeight
+                  ) {
+                    // Prevent scrolling beyond content
+                    window.scrollTo(
+                      0,
+                      document.body.offsetHeight - window.innerHeight
+                    );
+                  }
+                });
+              },
+              { passive: true }
+            );
           });
         }
       })();

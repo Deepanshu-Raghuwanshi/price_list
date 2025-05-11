@@ -54,6 +54,16 @@
   /* Hide scrollbar for IE, Edge and Firefox */
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+  /* Prevent background shift */
+  transform: translateZ(0); /* Hardware acceleration */
+  -webkit-transform: translateZ(0);
+  backface-visibility: hidden; /* Prevent background shift */
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px; /* Prevent background shift */
+  -webkit-perspective: 1000px;
+  /* Prevent overscroll */
+  overscroll-behavior: none;
+  -webkit-overflow-scrolling: auto;
 }
 
 .navigation {
@@ -205,6 +215,24 @@
 html,
 body {
   overscroll-behavior-y: none;
+}
+
+/* Additional fix for background image shift */
+@media (max-width: 768px) {
+  body {
+    background-color: #000; /* Match background color to prevent white flash */
+  }
+
+  .terms-container::after {
+    content: "";
+    position: fixed;
+    bottom: -50px; /* Extend below viewport */
+    left: 0;
+    right: 0;
+    height: 50px; /* Extra space to prevent white flash */
+    background-color: #000; /* Match your background or a color that blends with your background image */
+    z-index: -1;
+  }
 }
 
 /* Media Queries */
