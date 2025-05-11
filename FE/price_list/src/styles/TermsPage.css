@@ -201,6 +201,12 @@
   background-color: #45a049;
 }
 
+/* Prevent overscroll behavior that causes white space */
+html,
+body {
+  overscroll-behavior-y: none;
+}
+
 /* Media Queries */
 @media (max-width: 1200px) {
   /* Hamburger Menu */
@@ -306,9 +312,18 @@
     z-index: 1; /* Lower z-index to ensure it scrolls with page */
   }
 
-  /* Ensure the terms container takes up enough space to allow scrolling */
+  /* Ensure the terms container takes up the right amount of space */
   .terms-container {
-    min-height: 101vh; /* Slightly more than viewport height to ensure scrolling */
+    min-height: 100vh; /* Exactly viewport height to prevent extra white space */
+    box-sizing: border-box; /* Include padding in the height calculation */
+    padding-bottom: 0; /* No extra padding at bottom */
+    margin-bottom: 0; /* No margin at bottom */
+  }
+
+  /* Ensure the last element doesn't create extra space */
+  .terms-content-wrapper {
+    padding-bottom: 0;
+    margin-bottom: 0;
   }
 
   .nav-links {

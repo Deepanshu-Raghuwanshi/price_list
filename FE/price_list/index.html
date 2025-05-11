@@ -49,31 +49,33 @@
           // For mobile devices
           document.documentElement.style.height = "100vh";
 
-          // Ensure the page has enough content to scroll
-          const ensureScrollable = function () {
-            const body = document.body;
-            const html = document.documentElement;
+          // Add a small amount of extra space to ensure scrolling without visible white space
+          window.addEventListener("load", function () {
+            // Create a hidden spacer that's just enough to enable scrolling
+            const spacer = document.createElement("div");
+            spacer.id = "scroll-spacer";
+            spacer.style.height = "1px";
+            spacer.style.opacity = "0";
+            spacer.style.position = "absolute";
+            spacer.style.bottom = "0";
+            spacer.style.left = "0";
+            spacer.style.width = "100%";
+            document.body.appendChild(spacer);
 
-            // Get the maximum height of the page
-            const height = Math.max(
-              body.scrollHeight,
-              body.offsetHeight,
-              html.clientHeight,
-              html.scrollHeight,
-              html.offsetHeight
-            );
-
-            // If the page is not tall enough to scroll, add a spacer
-            if (height <= window.innerHeight) {
-              const spacer = document.createElement("div");
-              spacer.style.height = "1px";
-              spacer.style.marginBottom = window.innerHeight + "px";
-              document.body.appendChild(spacer);
-            }
-          };
-
-          window.addEventListener("load", ensureScrollable);
-          window.addEventListener("resize", ensureScrollable);
+            // Handle scrolling to prevent white space at bottom
+            window.addEventListener("scroll", function () {
+              // If we're near the bottom
+              if (
+                window.innerHeight + window.scrollY >=
+                document.body.offsetHeight - 50
+              ) {
+                // Prevent overscroll
+                document.body.style.overscrollBehavior = "none";
+              } else {
+                document.body.style.overscrollBehavior = "auto";
+              }
+            });
+          });
         }
       })();
     </script>
