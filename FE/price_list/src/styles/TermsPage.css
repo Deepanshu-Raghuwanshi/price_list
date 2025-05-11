@@ -56,12 +56,14 @@
   align-items: center;
   padding: 15px 30px;
   box-sizing: border-box;
+  position: relative; /* Ensure it's not fixed or sticky */
 }
 
 .nav-container {
   position: relative;
   display: flex;
   align-items: center;
+  z-index: 10; /* Ensure proper stacking context */
 }
 
 .nav-links {
@@ -114,6 +116,7 @@
   width: 100%;
   max-width: 1200px;
   margin-top: 20px;
+  position: relative; /* Ensure proper positioning */
 }
 
 .terms-title {
@@ -201,6 +204,13 @@
 
   .nav-container {
     margin-right: auto;
+    position: relative; /* Ensure it's not fixed */
+  }
+
+  .navigation {
+    position: relative; /* Ensure it scrolls with the page */
+    top: auto;
+    left: auto;
   }
 
   .nav-links {
@@ -284,6 +294,8 @@
 @media (max-width: 480px) {
   .navigation {
     padding: 15px 20px;
+    position: relative; /* Ensure it's not fixed on mobile */
+    top: auto; /* Reset any top positioning */
   }
 
   .nav-links {
