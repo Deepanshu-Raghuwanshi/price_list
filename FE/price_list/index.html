@@ -3,16 +3,34 @@
   <head>
     <meta charset="UTF-8" />
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+    />
+    <meta name="apple-mobile-web-app-capable" content="no" />
+    <meta name="mobile-web-app-capable" content="no" />
     <title>Vite + React</title>
     <style>
-      html,
+      html {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
       body {
         height: 100%;
         margin: 0;
         padding: 0;
         overflow-x: hidden;
-        overflow-y: auto;
+        overflow-y: scroll; /* Enable scrolling */
+      }
+      /* Hide scrollbar for Chrome, Safari and Opera */
+      body::-webkit-scrollbar {
+        display: none;
+      }
+      /* Hide scrollbar for IE, Edge and Firefox */
+      body {
+        -ms-overflow-style: none; /* IE and Edge */
+        scrollbar-width: none; /* Firefox */
       }
       #root {
         min-height: 100%;
@@ -23,5 +41,41 @@
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
+    <script>
+      // Force the URL bar to be visible and scroll with the page on mobile
+      (function () {
+        // This helps ensure the URL bar is in its natural state
+        if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
+          // For mobile devices
+          document.documentElement.style.height = "100vh";
+
+          // Ensure the page has enough content to scroll
+          const ensureScrollable = function () {
+            const body = document.body;
+            const html = document.documentElement;
+
+            // Get the maximum height of the page
+            const height = Math.max(
+              body.scrollHeight,
+              body.offsetHeight,
+              html.clientHeight,
+              html.scrollHeight,
+              html.offsetHeight
+            );
+
+            // If the page is not tall enough to scroll, add a spacer
+            if (height <= window.innerHeight) {
+              const spacer = document.createElement("div");
+              spacer.style.height = "1px";
+              spacer.style.marginBottom = window.innerHeight + "px";
+              document.body.appendChild(spacer);
+            }
+          };
+
+          window.addEventListener("load", ensureScrollable);
+          window.addEventListener("resize", ensureScrollable);
+        }
+      })();
+    </script>
   </body>
 </html>

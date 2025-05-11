@@ -47,6 +47,13 @@
   position: relative;
   overflow-x: hidden;
   overflow-y: auto;
+  /* Hide scrollbar for Chrome, Safari and Opera */
+  &::-webkit-scrollbar {
+    display: none;
+  }
+  /* Hide scrollbar for IE, Edge and Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .navigation {
@@ -296,6 +303,12 @@
     padding: 15px 20px;
     position: relative; /* Ensure it's not fixed on mobile */
     top: auto; /* Reset any top positioning */
+    z-index: 1; /* Lower z-index to ensure it scrolls with page */
+  }
+
+  /* Ensure the terms container takes up enough space to allow scrolling */
+  .terms-container {
+    min-height: 101vh; /* Slightly more than viewport height to ensure scrolling */
   }
 
   .nav-links {
