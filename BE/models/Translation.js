@@ -93,6 +93,20 @@ class Translation {
         key: "product.noProducts",
         value: "No products found. Create your first product!",
       },
+      {
+        language: "en",
+        key: "product.searchArticle",
+        value: "Search by Article Number",
+      },
+      {
+        language: "en",
+        key: "product.searchProduct",
+        value: "Search by Product Name",
+      },
+      { language: "en", key: "product.new", value: "New Product" },
+      { language: "en", key: "product.printList", value: "Print List" },
+      { language: "en", key: "product.advancedMode", value: "Advanced Mode" },
+      { language: "en", key: "product.actions", value: "Actions" },
       { language: "en", key: "common.logout", value: "Logout" },
 
       // Terms translations - English
@@ -199,6 +213,20 @@ Have a great day!</p>`,
         key: "product.noProducts",
         value: "Inga produkter hittades. Skapa din första produkt!",
       },
+      {
+        language: "sv",
+        key: "product.searchArticle",
+        value: "Sök på artikelnummer",
+      },
+      {
+        language: "sv",
+        key: "product.searchProduct",
+        value: "Sök på produktnamn",
+      },
+      { language: "sv", key: "product.new", value: "Ny produkt" },
+      { language: "sv", key: "product.printList", value: "Skriv ut lista" },
+      { language: "sv", key: "product.advancedMode", value: "Avancerat läge" },
+      { language: "sv", key: "product.actions", value: "Åtgärder" },
       { language: "sv", key: "common.logout", value: "Logga ut" },
 
       // Terms translations - Swedish
