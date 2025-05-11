@@ -15,14 +15,16 @@
         --vh: 1vh; /* Default value, will be set by JS */
       }
       html {
-        height: 100%; /* This will be the smallest possible viewport (URL bar shown) */
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
         margin: 0;
         padding: 0;
         background-color: transparent; /* Allow background image to show */
         overscroll-behavior-y: contain; /* Less restrictive than 'none' */
       }
       body {
-        height: 100%; /* This will be the smallest possible viewport (URL bar shown) */
+        height: 100%;
+        height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -40,7 +42,10 @@
         scrollbar-width: none; /* Firefox */
       }
       #root {
-        min-height: 100%; /* This will be the smallest possible viewport (URL bar shown) */
+        min-height: 100%;
+        min-height: calc(
+          var(--vh, 1vh) * 100
+        ); /* Use the custom --vh variable */
         -webkit-overflow-scrolling: touch;
         position: relative; /* Ensure proper stacking */
       }
@@ -70,10 +75,18 @@
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
     <script>
-      // Handle mobile viewport issues with URL bar based on Chrome 56+ behavior
+      // Handle mobile viewport issues with URL bar
       (function () {
-        // We don't need to set vh property anymore as we're using the browser's behavior
-        // Chrome 56+ uses the largest possible viewport for vh units
+        // Set the --vh custom property based on the actual viewport height
+        function setVhProperty() {
+          const vh = window.innerHeight * 0.01;
+          document.documentElement.style.setProperty("--vh", `${vh}px`);
+          // Apply the height directly to body
+          document.body.style.height = `calc(var(--vh, 1vh) * 100)`;
+        }
+
+        // Set it on initial load
+        setVhProperty();
 
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
           // For mobile devices
@@ -95,19 +108,39 @@
             // Force a small scroll to normalize the URL bar state
             setTimeout(function () {
               window.scrollTo(0, 1);
+              setTimeout(setVhProperty, 50);
             }, 100);
 
             // Handle scroll events
             let isFirstScroll = true;
+            let scrollTimer = null;
 
             window.addEventListener(
               "scroll",
               function () {
+                // Clear any existing timer
+                clearTimeout(scrollTimer);
+
                 // Special handling for first scroll (when URL bar typically hides)
                 if (isFirstScroll) {
-                  // Just mark as scrolled
+                  // Update vh property immediately on first scroll
+                  setVhProperty();
                   isFirstScroll = false;
                 }
+
+                // Set a timer to update after scrolling stops
+                scrollTimer = setTimeout(function () {
+                  setVhProperty();
+                }, 100);
+              },
+              { passive: true }
+            );
+
+            // Update on resize
+            window.addEventListener(
+              "resize",
+              function () {
+                setVhProperty();
               },
               { passive: true }
             );
@@ -116,9 +149,10 @@
             window.addEventListener(
               "orientationchange",
               function () {
-                // Force a small scroll after orientation change
+                // Delay to ensure correct height after orientation change
                 setTimeout(function () {
                   window.scrollTo(0, 1);
+                  setTimeout(setVhProperty, 50);
                 }, 100);
               },
               { passive: true }

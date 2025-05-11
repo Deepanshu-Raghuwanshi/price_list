@@ -34,7 +34,8 @@
 
 .terms-container {
   width: 100%;
-  min-height: 100vh; /* This will be the largest possible viewport (URL bar hidden) */
+  min-height: 100vh; /* Fallback for browsers that do not support custom properties */
+  min-height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
   background-image: url("https://storage.123fakturera.se/public/wallpapers/sverige43.jpg");
   background-size: cover;
   background-position: center;
