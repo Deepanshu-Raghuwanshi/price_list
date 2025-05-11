@@ -221,6 +221,9 @@ body {
   .terms-container {
     /* Use the custom --vh variable with higher specificity */
     min-height: calc(var(--vh, 1vh) * 100) !important;
+    background-attachment: fixed !important; /* Force fixed background on iOS */
+    background-size: cover !important; /* Ensure full image coverage */
+    background-position: center !important; /* Center the background image */
   }
 }
 
@@ -338,8 +341,10 @@ body {
     ); /* Use safe area inset if available */
     position: relative;
     z-index: 0; /* Ensure proper stacking context */
-    background-attachment: scroll; /* Use scroll on mobile to prevent issues */
+    background-attachment: fixed; /* Change back to fixed for proper proportions */
     background-color: transparent; /* Ensure background image is visible */
+    background-size: cover; /* Ensure full image coverage */
+    background-position: center; /* Center the background image */
   }
 
   .nav-links {

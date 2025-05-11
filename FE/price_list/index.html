@@ -54,6 +54,12 @@
         #root {
           height: -webkit-fill-available;
         }
+        /* Ensure background image displays correctly on iOS */
+        .terms-container {
+          background-attachment: fixed !important;
+          background-size: cover !important;
+          background-position: center !important;
+        }
       }
     </style>
   </head>
