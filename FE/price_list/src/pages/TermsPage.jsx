@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useLanguage } from "../contexts/LanguageContext";
 import LanguageSwitcher from "../components/LanguageSwitcher";
 import { motion } from "framer-motion";
+import { initViewportHeightFix } from "../utils/viewportUtils";
 import "../styles/TermsPage.css";
 
 const TermsPage = () => {
@@ -41,6 +42,11 @@ const TermsPage = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [isMenuOpen]);
+
+  // Initialize viewport height fix for mobile
+  useEffect(() => {
+    initViewportHeightFix();
+  }, []);
 
   return (
     <div className="terms-container">

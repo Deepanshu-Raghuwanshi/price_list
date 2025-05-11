@@ -34,7 +34,8 @@
 
 .terms-container {
   width: 100%;
-  min-height: 100vh;
+  min-height: 100vh; /* Fallback for browsers that do not support custom properties */
+  min-height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
   background-image: url("https://storage.123fakturera.se/public/wallpapers/sverige43.jpg");
   background-size: cover;
   background-position: center;
@@ -205,6 +206,17 @@
 html,
 body {
   overscroll-behavior-y: contain; /* Less restrictive than 'none' */
+  height: 100%; /* Ensure full height */
+  overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+/* Fix for iOS Safari and other mobile browsers */
+@supports (-webkit-touch-callout: none) {
+  /* CSS specific to iOS devices */
+  .terms-container {
+    /* Use the custom --vh variable with higher specificity */
+    min-height: calc(var(--vh, 1vh) * 100) !important;
+  }
 }
 
 /* Media Queries */
@@ -312,10 +324,15 @@ body {
     z-index: 1; /* Lower z-index to ensure it scrolls with page */
   }
 
-  /* Simple fix for mobile */
+  /* Fix for mobile viewport issues */
   .terms-container {
-    min-height: 100vh;
-    padding-bottom: 1px; /* Small padding to prevent white space */
+    min-height: calc(var(--vh, 1vh) * 100);
+    padding-bottom: env(
+      safe-area-inset-bottom,
+      1px
+    ); /* Use safe area inset if available */
+    position: relative;
+    z-index: 0; /* Ensure proper stacking context */
   }
 
   .nav-links {
