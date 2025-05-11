@@ -5,7 +5,7 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta
       name="viewport"
-      content="width=device-width, initial-scale=1.0, viewport-fit=cover, height=device-height, user-scalable=no"
+      content="width=device-width, initial-scale=1, user-scalable=no, shrink-to-fit=no, viewport-fit=cover"
     />
     <meta name="apple-mobile-web-app-capable" content="no" />
     <meta name="mobile-web-app-capable" content="no" />
@@ -15,16 +15,14 @@
         --vh: 1vh; /* Default value, will be set by JS */
       }
       html {
-        height: 100%;
-        height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
+        height: 100vh; /* Use viewport height instead of percentage */
         margin: 0;
         padding: 0;
         background-color: transparent; /* Allow background image to show */
         overscroll-behavior-y: contain; /* Less restrictive than 'none' */
       }
       body {
-        height: 100%;
-        height: calc(var(--vh, 1vh) * 100); /* Use the custom --vh variable */
+        height: 100vh; /* Use viewport height instead of percentage */
         margin: 0;
         padding: 0;
         overflow-x: hidden;
@@ -42,10 +40,7 @@
         scrollbar-width: none; /* Firefox */
       }
       #root {
-        min-height: 100%;
-        min-height: calc(
-          var(--vh, 1vh) * 100
-        ); /* Use the custom --vh variable */
+        min-height: 100vh; /* Use viewport height instead of percentage */
         -webkit-overflow-scrolling: touch;
         position: relative; /* Ensure proper stacking */
       }
@@ -54,19 +49,8 @@
         html,
         body,
         #root {
-          height: -webkit-fill-available;
-        }
-        /* Add an invisible fixed element to prevent white space on iOS */
-        body::after {
-          content: "";
-          position: fixed;
-          bottom: 0;
-          left: 0;
-          right: 0;
-          height: 300px;
-          background-color: transparent; /* Completely transparent */
-          pointer-events: none;
-          z-index: 9999;
+          min-height: 100vh; /* Use viewport height for iOS too */
+          height: -webkit-fill-available; /* Fallback for iOS */
         }
       }
     </style>
@@ -77,82 +61,42 @@
     <script>
       // Handle mobile viewport issues with URL bar
       (function () {
-        // Set the --vh custom property based on the actual viewport height
-        function setVhProperty() {
-          const vh = window.innerHeight * 0.01;
-          document.documentElement.style.setProperty("--vh", `${vh}px`);
-          // Apply the height directly to body
-          document.body.style.height = `calc(var(--vh, 1vh) * 100)`;
-        }
-
-        // Set it on initial load
-        setVhProperty();
+        // We don't need to set custom vh property anymore
+        // Using 100vh directly in CSS
 
         if (/iPhone|iPad|iPod|Android/i.test(navigator.userAgent)) {
           // For mobile devices
           window.addEventListener("load", function () {
-            // Create an invisible fixed element to prevent white space
-            const fixedElement = document.createElement("div");
-            fixedElement.style.cssText = `
-              position: fixed;
-              bottom: 0;
-              left: 0;
-              right: 0;
-              height: 300px;
-              background-color: transparent; /* Completely transparent */
-              pointer-events: none;
-              z-index: 9999;
-            `;
-            document.body.appendChild(fixedElement);
+            // We don't need a fixed element anymore
 
             // Force a small scroll to normalize the URL bar state
             setTimeout(function () {
               window.scrollTo(0, 1);
-              setTimeout(setVhProperty, 50);
             }, 100);
 
             // Handle scroll events
             let isFirstScroll = true;
-            let scrollTimer = null;
 
             window.addEventListener(
               "scroll",
               function () {
-                // Clear any existing timer
-                clearTimeout(scrollTimer);
-
                 // Special handling for first scroll (when URL bar typically hides)
                 if (isFirstScroll) {
-                  // Update vh property immediately on first scroll
-                  setVhProperty();
                   isFirstScroll = false;
                 }
-
-                // Set a timer to update after scrolling stops
-                scrollTimer = setTimeout(function () {
-                  setVhProperty();
-                }, 100);
               },
               { passive: true }
             );
 
-            // Update on resize
-            window.addEventListener(
-              "resize",
-              function () {
-                setVhProperty();
-              },
-              { passive: true }
-            );
+            // We don't need a resize handler anymore
 
             // Handle orientation changes
             window.addEventListener(
               "orientationchange",
               function () {
-                // Delay to ensure correct height after orientation change
+                // Force a small scroll after orientation change
                 setTimeout(function () {
                   window.scrollTo(0, 1);
-                  setTimeout(setVhProperty, 50);
                 }, 100);
               },
               { passive: true }
